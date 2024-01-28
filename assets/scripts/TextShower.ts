@@ -4,32 +4,32 @@ const { ccclass, property } = _decorator;
 @ccclass('TextShower')
 export class TextShower extends Component {
     @property(Label)
-    label:Label;
+    label: Label;
     @property(CCString)
-    showText:string; 
+    showText: string;
     @property(CCFloat)
     showSpeed: number;
 
-    _index:number = 0;
-    _showedText:string = ""; 
+    _index: number = 0;
+    _showedText: string = "";
     start() {
 
     }
 
     update(deltaTime: number) {
-        input.on(Input.EventType.MOUSE_UP,(event)=>{
+        input.on(Input.EventType.MOUSE_UP, (event) => {
             this.OnShowTextOneByOne();
-        },this);
+        }, this);
     }
 
-    public OnShowTextOneByOne(){
-        this.label.string ="";
+    public OnShowTextOneByOne() {
+        this.label.string = "";
         this._showedText = "";
         this._index = 0;
-        this.schedule(this.ShowTextOneByOne,this.showSpeed,this.showText.length);
+        this.schedule(this.ShowTextOneByOne, this.showSpeed, this.showText.length);
     }
-    private ShowTextOneByOne(){
-        this._showedText = this.showText.slice(0,this._index);
+    private ShowTextOneByOne() {
+        this._showedText = this.showText.slice(0, this._index);
         this.label.string = this._showedText;
         this._index++;
     }
