@@ -6,20 +6,20 @@ export class TextShower extends Component {
     @property(Label)
     label: Label;
     @property(CCString)
-    showText: string;
+    public showText: string;
     @property(CCFloat)
     showSpeed: number;
 
     _index: number = 0;
     _showedText: string = "";
     start() {
-
+        // input.on(Input.EventType.MOUSE_UP, (event) => {
+        //     this.OnShowTextOneByOne();
+        // }, this);
     }
 
     update(deltaTime: number) {
-        input.on(Input.EventType.MOUSE_UP, (event) => {
-            this.OnShowTextOneByOne();
-        }, this);
+
     }
 
     public OnShowTextOneByOne() {
