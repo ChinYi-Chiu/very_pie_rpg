@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "SceneIndoorTrans",
+    "_name": "Indoor_SceneTrans",
     "_objFlags": 0,
     "__editorExtras__": {
       "embeddedPlayerGroups": []
