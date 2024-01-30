@@ -8,6 +8,7 @@ enum StoryState {
     SS_SPEAKING,
     SS_SPEAKINGEND,
     SS_CHECKCHII,
+    SS_FIGHTING
 }
 
 /**
@@ -69,6 +70,14 @@ export class GameManager extends Component {
     }
 
     updateUI() {
+        if (this.story.scene.length == 0) {
+            this.listenMouse(false);
+            this.optionShow(false);
+            this.dialogContent.string = "進入戰鬥場景!!!"
+            this.currentState = StoryState.SS_FIGHTING;
+        }
+
+
         let scene: IScene = this.story.scene[0];
         switch (this.currentState) {
             case StoryState.SS_SITUATION:
