@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, Node, ProgressBar, Tween, tween, Vec2, Vec3 } from 'cc';
+import { _decorator, CCInteger, Component, Node, ProgressBar, Tween, tween, Vec2, Vec3, Animation, find } from 'cc';
 import { TextShower } from './TextShower';
 const { ccclass, property } = _decorator;
 
@@ -60,9 +60,24 @@ toyz 背對衣服掀起
     @property(Node)
     public buttonDodge: Node;
 
+    @property(Node)
+    public dodgeNode: Node;
+
     private nextChiiStep = () => { };
 
     private isDodging: boolean = false;
+
+    playDodgeAnimation() {
+        // 使用 find 函數查找 body 節點
+        const bodyNode = find("Canvas/Node/Tozy/body");
+        if (bodyNode) {
+            const animation = bodyNode.getComponent(Animation);
+            if (animation) {
+                // 播放名為 "Fight_Dodge" 的動畫剪輯
+                animation.play('Fight_Dodge');
+            }
+        }
+    }
 
     //鬼之閃避(可閃超派鐵拳)
     public Dodge() {
@@ -104,11 +119,7 @@ toyz 背對衣服掀起
                 .set({ active: false })
                 .set({ position: this.chiiPosition.position })
                 .start();
-            tween(this.tozy)
-                .by(0.1, { position: new Vec3(-80, 0, 0) })
-                .delay(0.1)
-                .by(0.1, { position: new Vec3(80, 0, 0) })
-                .start();
+            this.playDodgeAnimation();
             this.textShower.showText = "你躲掉起哥的攻擊了";
             this.textShower.OnShowTextOneByOne();
             this.nextChiiStep = this.Bag;

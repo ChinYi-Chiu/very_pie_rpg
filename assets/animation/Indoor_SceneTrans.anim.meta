@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "82769fc0-8cc3-4a48-af69-6fe11ad67a2b",
+  "uuid": "0d554761-ffa3-4114-af2b-0eb83595975b",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "SceneFightTrans"
+    "name": "Indoor_SceneTrans"
   }
 }
