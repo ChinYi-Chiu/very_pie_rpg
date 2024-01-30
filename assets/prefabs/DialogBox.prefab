@@ -673,9 +673,7 @@
     "__prefab": {
       "__id__": 29
     },
-    "label": {
-      "__id__": 18
-    },
+    "label": null,
     "showText": "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextt",
     "showSpeed": 0.1,
     "_id": ""
@@ -693,7 +691,6 @@
       "__id__": 0
     },
     "fileId": "44GusEjcJPVrL6/miuj5aH",
-    "instance": null,
     "targetOverrides": null
   }
 ]
