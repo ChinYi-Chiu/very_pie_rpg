@@ -6,8 +6,8 @@ enum StoryState {
     SS_SITUATION,
     SS_OPTION,
     SS_SPEAKING,
-    SS_SPEAKINGEND,
-    SS_CHECKCHII,
+    SS_SPEAKING_END,
+    SS_CHECK_CHII,
     SS_FIGHTING
 }
 
@@ -67,6 +67,8 @@ export class GameManager extends Component {
     private anan: Node | null = null;
     @property(Node)
     private chii: Node | null = null;
+    @property(Node)
+    private nextPageHint: Node | null = null;
 
     @property(TextShowerRandy)
     private textShowerRandy: TextShowerRandy | null = null;
@@ -117,9 +119,12 @@ export class GameManager extends Component {
                 this.listenMouse(true);
                 this.optionShow(false);
                 this.dialogContent.string = scene.situation;
-                this.roleSpeaking(false);
+                this.toggleNextPageHint(true);
+                // this.roleSpeaking(false);
                 break;
             case StoryState.SS_OPTION:
+
+                this.toggleNextPageHint(false);
                 this.listenMouse(false);
                 this.optionShow(true);
                 this.dialogContent.node.active = false;
@@ -139,14 +144,16 @@ export class GameManager extends Component {
                 this.textShowerRandy?.active(true);
                 this.roleSpeaking(true, this._choseRole(scene.options[this.currentChoseOption].role));
                 break;
-            case StoryState.SS_SPEAKINGEND:
+            case StoryState.SS_SPEAKING_END:
                 this.optionShow(false);
                 this.dialogContent.node.active = true;
                 this.textShowerRandy?.unscheduleAllCallbacks();
                 this.dialogContent.string = scene.options[this.currentChoseOption].speak;
-                this.roleSpeaking(false);
+                this.roleSpeaking(false, this._choseRole(scene.options[this.currentChoseOption].role));
+                this.toggleNextPageHint(true);
                 break;
-            case StoryState.SS_CHECKCHII:
+            case StoryState.SS_CHECK_CHII:
+                this.toggleNextPageHint(false);
                 this.dialogContent.node.active = true;
                 this.dialogContent.string = scene.chii;
                 this.story.scene.shift();
@@ -164,9 +171,11 @@ export class GameManager extends Component {
         if (this.jsonStory) this.story = this.jsonStory.json as IStory;
         // 從第一個場景開始
         this.updateState(StoryState.SS_SITUATION);
+
+        this.nextPageHint.active = false;
     }
 
-    private textingEnd() { this.updateState(StoryState.SS_SPEAKINGEND) };
+    private textingEnd() { this.updateState(StoryState.SS_SPEAKING_END) };
 
     update(deltaTime: number) {
     }
@@ -178,12 +187,12 @@ export class GameManager extends Component {
             }
             // 說話場景中，假設使用者點左鍵了，就強制說話結束。
             if (this.currentState == StoryState.SS_SPEAKING) {
-                return this.updateState(StoryState.SS_SPEAKINGEND);
+                return this.updateState(StoryState.SS_SPEAKING_END);
             }
-            if (this.currentState == StoryState.SS_SPEAKINGEND) {
-                return this.updateState(StoryState.SS_CHECKCHII)
+            if (this.currentState == StoryState.SS_SPEAKING_END) {
+                return this.updateState(StoryState.SS_CHECK_CHII)
             }
-            if (this.currentState == StoryState.SS_CHECKCHII) {
+            if (this.currentState == StoryState.SS_CHECK_CHII) {
                 return this.updateState(StoryState.SS_SITUATION)
             }
         }
@@ -220,8 +229,8 @@ export class GameManager extends Component {
      * @param role 傳入角色
      * @param speaking 傳入是否有在講話
      */
-    roleSpeaking(speaking: boolean, role?: Node) {
-        if (!speaking) return Tween.stopAll();
+    roleSpeaking(speaking: boolean, role: Node) {
+        if (!speaking) return Tween.stopAllByTarget(role);
         let t = tween(role)
             // .target(role)
             .to(0.1, {
@@ -249,6 +258,30 @@ export class GameManager extends Component {
                 break;
         }
         return this.node;
+    }
+
+    /**
+     * 顯示點擊下一頁提示。
+     * @param e 是否顯示
+     */
+    toggleNextPageHint(e: boolean) {
+        let n = this.nextPageHint;
+        n.active = e;
+        if (e) {
+            let t = tween(n)
+                .to(0.25, {
+                    position: new Vec3(n.position.x, n.position.y + 5, n.position.z)
+                })
+                .to(0.25, {
+                    position: new Vec3(n.position.x, n.position.y - 5, n.position.z)
+                })
+                .start()
+
+            // 重複搖，搖到死，搖到他媽變單親媽媽。
+            tween(n).repeat(Number.MAX_VALUE, t).start();
+        } else {
+            Tween.stopAllByTarget(n);
+        }
     }
 }
 
