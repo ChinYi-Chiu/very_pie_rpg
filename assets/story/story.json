@@ -200,7 +200,16 @@
       ]
     },
     {
-      "situation": "Tozy:阿最近生意好嗎?\n起哥:都還不錯啦，我賺錢也可以揪你一起做",
+      "dialogs": [
+        {
+          "role": "tozy",
+          "speak": "阿最近生意好嗎?"
+        },
+        {
+          "role": "chii",
+          "speak": "起哥:都還不錯啦，我賺錢也可以揪你一起做"
+        }
+      ],
       "options": [
         {
           "role": "tozy",
