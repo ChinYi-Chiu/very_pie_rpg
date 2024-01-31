@@ -78,18 +78,31 @@ toyz 背對衣服掀起
             }
         }
     }
+    playChiiAnimation() {
+        // 使用 find 函數查找 body 節點
+        const bodyNode = find("Canvas/Chii_Attack");
+        if (bodyNode) {
+            const animation = bodyNode.getComponent(Animation);
+            if (animation) {
+                // 播放名為 "Fight_Dodge" 的動畫剪輯
+                animation.play('Fight_ChiiFist');
+            }
+        }
+    }
 
     //鬼之閃避(可閃超派鐵拳)
     public Dodge() {
-        if (!this.isDodging) {
+        /*if (!this.isDodging) {
             this.isDodging = true;
-            this.nextChiiStep = this.Pie;
-            this.scheduleOnce(this.nextChiiStep);
+            
         }
         else {
             this.nextChiiStep = this.Bag;
             this.scheduleOnce(this.nextChiiStep);
-        }
+        }*/
+        this.isDodging = true;
+        this.nextChiiStep = this.Pie;
+        this.scheduleOnce(this.nextChiiStep);
     }
 
     //邏輯壓制(超哥殺紅了眼，效果甚微)
@@ -112,14 +125,8 @@ toyz 背對衣服掀起
     //超派鐵拳(扣1/3血)
     public Pie() {
         if (this.isDodging) {
-            tween(this.Hand)
-                .set({ active: true })
-                .to(0.1, { position: this.tozyPosition.position })
-                .delay(0.2)
-                .set({ active: false })
-                .set({ position: this.chiiPosition.position })
-                .start();
             this.playDodgeAnimation();
+            this.playChiiAnimation();
             this.textShower.showText = "你躲掉起哥的攻擊了";
             this.textShower.OnShowTextOneByOne();
             this.nextChiiStep = this.Bag;

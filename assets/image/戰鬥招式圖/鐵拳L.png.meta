@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "3560b195-7117-4e1a-beae-29753df6a0a8",
+  "uuid": "a6a6b91b-3045-486e-a061-9244007c5b42",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "3560b195-7117-4e1a-beae-29753df6a0a8@6c48a",
-      "displayName": "鐵拳",
+      "uuid": "a6a6b91b-3045-486e-a061-9244007c5b42@6c48a",
+      "displayName": "鐵拳L",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "3560b195-7117-4e1a-beae-29753df6a0a8",
+        "imageUuidOrDatabaseUri": "a6a6b91b-3045-486e-a061-9244007c5b42",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,17 +34,17 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "3560b195-7117-4e1a-beae-29753df6a0a8@f9941",
-      "displayName": "鐵拳",
+      "uuid": "a6a6b91b-3045-486e-a061-9244007c5b42@f9941",
+      "displayName": "鐵拳L",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 11,
+        "offsetX": -11,
         "offsetY": 66.5,
-        "trimX": 791,
+        "trimX": 769,
         "trimY": 330,
         "width": 242,
         "height": 188,
@@ -83,23 +83,23 @@
             3
           ],
           "uv": [
-            791,
+            769,
             651,
-            1033,
+            1011,
             651,
-            791,
+            769,
             463,
-            1033,
+            1011,
             463
           ],
           "nuv": [
-            0.43895671476137627,
+            0.4267480577136515,
             0.47196738022426094,
-            0.5732519422863485,
+            0.5610432852386238,
             0.47196738022426094,
-            0.43895671476137627,
+            0.4267480577136515,
             0.6636085626911316,
-            0.5732519422863485,
+            0.5610432852386238,
             0.6636085626911316
           ],
           "minPos": [
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3560b195-7117-4e1a-beae-29753df6a0a8@6c48a",
+        "imageUuidOrDatabaseUri": "a6a6b91b-3045-486e-a061-9244007c5b42@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "3560b195-7117-4e1a-beae-29753df6a0a8@f9941"
+    "redirect": "a6a6b91b-3045-486e-a061-9244007c5b42@f9941"
   }
 }
