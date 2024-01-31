@@ -6,14 +6,14 @@ const { ccclass, property } = _decorator;
 @ccclass('AnimationController')
 export class AnimationController extends Component {
     start() {
-        // 開始撥放 chiiWatchingLive 這個動畫(使用 chiiComing 示範)
-        this.gameManager?.node.on('chiiWatchingLive', (ev: Event) => {
-            this.chii.play("chiiComing"); //播動畫
-            this.audioController.play("chiiWalking"); //播音樂
+        // 開始撥放 start 這個動畫
+        this.gameManager?.node.on('Start', (ev: Event) => {
+            this.start_page.play("Start"); //播動畫
+            this.audioController.play("Start_Page"); //播音樂
             setTimeout(() => { //等動畫播完後做其他事
-                this.audioController.stop("chiiWalking"); //音樂停
+                this.audioController.stop("Start_Page"); //音樂停
                 this.gameManager.updateUI(); // 播完動畫，進入下一個場景
-            }, this.chii.getState("chiiComing").duration * 1000);
+            }, this.start_page.getState("Start").duration * 1000);
         }, this);
 
         // 開始播放超哥走進來的動畫。
@@ -39,6 +39,8 @@ export class AnimationController extends Component {
     @property(Animation)
     chii: Animation | null = null;
 
+    @property(Animation)
+    start_page: Animation|null=null;
 
 }
 

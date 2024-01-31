@@ -22,12 +22,6 @@
       ]
     },
     {
-      "events": [ {
-          "id": "chiiWatchingLive",
-          "speak": "起哥: 看直播中..."
-        } ]
-    },
-    {
       "situation": "胺胺(小女孩) 你吃這個 看好不好吃",
       "options": [
         {
