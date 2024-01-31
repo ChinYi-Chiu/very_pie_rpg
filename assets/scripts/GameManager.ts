@@ -93,11 +93,21 @@ export class GameManager extends Component {
         if ("events" in scene) {
             //! speak 跟 delay 還沒做
             this.listenMouse(false); // 關閉滑鼠事件
-            this.story.scene.shift(); // 把 event 退出來
+            this.story.scene.shift(); // 把 event 退出來    
             while (scene.events.length > 0) {
                 let customEvent = scene.events.shift();
                 console.log("play:" + customEvent.id);
-                this.node.emit(customEvent.id); // 告訴所有人要播哪個動畫
+
+                // 講話
+                if (customEvent.speak) {
+                    this.dialogContent.string = customEvent.speak;
+                    this.textShowerRandy?.active(true);
+                }
+
+                // 動畫及延遲
+                setTimeout(() => {
+                    this.node.emit(customEvent.id); // 告訴所有人要播哪個動畫
+                }, customEvent.aniDelay ?? 0);
             }
             return
         }
@@ -165,7 +175,7 @@ export class GameManager extends Component {
 
     start() {
         // 監聽打字打完沒
-        this.textShowerRandy?.node.on('textingEnd', this.textingEnd, this);
+        // this.textShowerRandy?.node.on('textingEnd', this.textingEnd, this);
 
         // 載入文本物件
         if (this.jsonStory) this.story = this.jsonStory.json as IStory;
@@ -173,7 +183,6 @@ export class GameManager extends Component {
         this.updateState(StoryState.SS_SITUATION);
     }
 
-    private textingEnd() { this.updateState(StoryState.SS_SPEAKING_END) };
 
     update(deltaTime: number) {
     }
