@@ -67,8 +67,13 @@ export class GameManager extends Component {
     private anan: Node | null = null;
     @property(Node)
     private chii: Node | null = null;
+
+    // 下一頁提示(拳頭)
     @property(Node)
     private nextPageHint: Node | null = null;
+    // 說話遮罩
+    @property(Node)
+    private speakingMask: Node | null = null;
 
     @property(TextShowerRandy)
     private textShowerRandy: TextShowerRandy | null = null;
@@ -174,6 +179,7 @@ export class GameManager extends Component {
     }
 
     start() {
+        this.speakingMask.active = false;
         // 監聽打字打完沒
         // this.textShowerRandy?.node.on('textingEnd', this.textingEnd, this);
 
@@ -237,7 +243,13 @@ export class GameManager extends Component {
      * @param speaking 傳入是否有在講話
      */
     roleSpeaking(speaking: boolean, role: Node) {
-        if (!speaking) return Tween.stopAllByTarget(role);
+        if (!speaking) {
+            this.speakingMask.active = false;
+            role.setSiblingIndex(this.speakingMask.getSiblingIndex() - 1);
+            return Tween.stopAllByTarget(role);
+        }
+        this.speakingMask.active = true;
+        role.setSiblingIndex(this.speakingMask.getSiblingIndex());
         let t = tween(role)
             // .target(role)
             .to(0.1, {
