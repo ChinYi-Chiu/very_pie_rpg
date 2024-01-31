@@ -66,43 +66,32 @@ toyz 背對衣服掀起
     private nextChiiStep = () => { };
 
     private isDodging: boolean = false;
+    private isSacking: boolean = false;
 
-    playDodgeAnimation() {
-        // 使用 find 函數查找 body 節點
-        const bodyNode = find("Canvas/Node/Tozy/body");
+    private playAnimation(nodePath: string, animationName: string) {
+        const bodyNode = find(nodePath);
         if (bodyNode) {
             const animation = bodyNode.getComponent(Animation);
             if (animation) {
-                // 播放名為 "Fight_Dodge" 的動畫剪輯
-                animation.play('Fight_Dodge');
-            }
-        }
-    }
-    playChiiAnimation() {
-        // 使用 find 函數查找 body 節點
-        const bodyNode = find("Canvas/Chii_Attack");
-        if (bodyNode) {
-            const animation = bodyNode.getComponent(Animation);
-            if (animation) {
-                // 播放名為 "Fight_Dodge" 的動畫剪輯
-                animation.play('Fight_ChiiFist');
+                animation.play(animationName);
             }
         }
     }
 
     //鬼之閃避(可閃超派鐵拳)
     public Dodge() {
-        /*if (!this.isDodging) {
+        if (!this.isDodging) {
             this.isDodging = true;
-            
+            this.nextChiiStep = this.Pie;
+            this.scheduleOnce(this.nextChiiStep);
         }
         else {
             this.nextChiiStep = this.Bag;
             this.scheduleOnce(this.nextChiiStep);
-        }*/
-        this.isDodging = true;
+        }
+        /*this.isDodging = true;
         this.nextChiiStep = this.Pie;
-        this.scheduleOnce(this.nextChiiStep);
+        this.scheduleOnce(this.nextChiiStep);*/
     }
 
     //邏輯壓制(超哥殺紅了眼，效果甚微)
@@ -125,12 +114,11 @@ toyz 背對衣服掀起
     //超派鐵拳(扣1/3血)
     public Pie() {
         if (this.isDodging) {
-            this.playDodgeAnimation();
-            this.playChiiAnimation();
+            this.playAnimation("Canvas/Node/Tozy/body", 'Fight_Dodge');
+            this.playAnimation("Canvas/Tozy_Doge", 'Fight_ChiiFist');
             this.textShower.showText = "你躲掉起哥的攻擊了";
             this.textShower.OnShowTextOneByOne();
             this.nextChiiStep = this.Bag;
-            return;
         }
         if (this.TryKillTozy(1)) {
             console.log("有扣寫");
@@ -142,31 +130,29 @@ toyz 背對衣服掀起
 
     //蓋布袋(使致盲無法行動)
     public Bag() {
-        this.textShower.showText = "你的眼前一片黑暗";
-        this.textShower.OnShowTextOneByOne();
-        tween()
-            .delay(1)
-            .set(this.Black.active = true)
-            .set(this.BagNode.active = true)
-            .set(this.Chair.active = true)
-            .start();
-
-            // this.nextChiiStep = this.ChairAttack;
-        return;
+        if(!this.isSacking){
+            this.textShower.showText = "你的眼前一片黑暗";
+            this.textShower.OnShowTextOneByOne();
+            this.playAnimation("Canvas/Tozy_Sack", 'Fight_Sack');
+            this.isSacking = true;
+            return;
+        }else{
+            this.nextChiiStep = this.ChairAttack;
+        }
+        
     }
 
     //椅子砸椅子(扣2/3血)
     public ChairAttack() {
-
-
         //Demo版其實也不用扣了，直接打死
-        return;
-        if (this.TryKillTozy(2)) {
-
+        if (this.TryKillTozy(3)) {
+            this.playAnimation()
         }
         else {
+            //沒死動作
             tween(this.TozyHPBar);
         }
+        return;
     }
 
     public ToEndA() {
