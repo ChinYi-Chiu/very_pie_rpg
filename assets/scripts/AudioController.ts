@@ -49,7 +49,7 @@ export class AudioController extends Component {
     chiiWalking: AudioSource | null = null;
 
     @property(AudioSource)
-    start_page: AudioSource | null = null;
+    startPage: AudioSource | null = null;
 
     // 音訊來源 (bgm)
     @property(AudioSource)

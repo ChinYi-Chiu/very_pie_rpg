@@ -8,12 +8,12 @@ export class AnimationController extends Component {
     start() {
         // 開始撥放 start 這個動畫
         this.gameManager?.node.on('Start', (ev: Event) => {
-            this.start_page.play("Start"); //播動畫
-            this.audioController.play("Start_Page"); //播音樂
+            this.start_page.play("Indoor_SceneTrans"); //播動畫
+            this.audioController.play("startPage"); //播音樂
             setTimeout(() => { //等動畫播完後做其他事
-                this.audioController.stop("Start_Page"); //音樂停
+                this.audioController.stop("startPage"); //音樂停
                 this.gameManager.updateUI(); // 播完動畫，進入下一個場景
-            }, this.start_page.getState("Start").duration * 1000);
+            }, this.start_page.getState("Indoor_SceneTrans").duration * 1000);
         }, this);
 
         // 開始播放超哥走進來的動畫。

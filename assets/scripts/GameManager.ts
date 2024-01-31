@@ -1,4 +1,4 @@
-import { _decorator, Component, error, EventMouse, input, Input, JsonAsset, Label, Node, TextAsset, Tween, tween, Vec3 } from 'cc';
+import { _decorator, animation, Animation, AnimationClip, Component, error, EventMouse, input, Input, JsonAsset, Label, Node, TextAsset, Tween, tween, Vec3 } from 'cc';
 import { TextShowerRandy } from './TextShowerRandy';
 const { ccclass, property } = _decorator;
 
@@ -8,31 +8,42 @@ enum StoryState {
     SS_SPEAKING,
     SS_SPEAKING_END,
     SS_CHECK_CHII,
-    SS_FIGHTING
+    SS_FIGHTING,
+    SS_DIALOG, // dialog 專用的狀態
+    SS_DIALOGING, // dialog 專用的狀態
+    SS_DIALOG_END, // dialog 專用的狀態
 }
 
 /**
  * 文本結構
- * ! 注意，所有值為必填。
+ * @description 
+ * 後面有 ? 的為選填項，除了選填項其他請務必一定要填入值
  */
 interface IStory {
-    scene: ({ events: Ievents[] } | IScene)[]
+    scenes: (IScene | IEvent | IDialog)[]
 }
-interface IScene {//場景， queue 讀取。
-    situation: string, //場景旁白
+interface IScene { //場景
+    type: "scene",
+    situation?: string, //場景旁白
     options: { //選項以及狀態，長度必須是三或二(三個或兩個選項)
         role: string, //哪個角色
         chiiFire: "down" | "keep" | "up", //起哥發火進度
         option: string, //選項的文字
-        speak: string, //講的話的文字
+        speak?: string, //講的話的文字
     }[]
-    chii: string, //起哥狀態(旁白)
 }
-
-interface Ievents {
+interface IEvent { //事件(動畫)
+    type: "event",
     id: string, //動畫名稱
     speak?: string, //講的話
     aniDelay?: number //延遲時間
+}
+interface IDialog { //對話
+    type: "dialog",
+    dialogs: {
+        role: string, //說話的角色
+        speak: string, //說的話
+    }[]
 }
 
 @ccclass('GameManager')
@@ -71,9 +82,16 @@ export class GameManager extends Component {
     // 下一頁提示(拳頭)
     @property(Node)
     private nextPageHint: Node | null = null;
-    // 說話遮罩
+
+    // 遮罩
     @property(Node)
     private speakingMask: Node | null = null;
+    @property(Node)
+    private situationMask: Node | null = null;
+
+    // 情境大字
+    @property(Node)
+    private situationLabel: Node | null = null;
 
     @property(TextShowerRandy)
     private textShowerRandy: TextShowerRandy | null = null;
@@ -81,105 +99,117 @@ export class GameManager extends Component {
     updateState(newState: StoryState) {
         this.currentState = newState;
         console.log('State changed to:', StoryState[this.currentState]);
+        if (newState == StoryState.SS_DIALOG || newState == StoryState.SS_DIALOG_END || newState == StoryState.SS_DIALOGING) return;
         this.updateUI()
     }
 
     updateUI() {
-        if (this.story.scene.length == 0) {
+        // 如果沒有 scene 了，那就代表所有 rpg 都走完了，切換到戰鬥場面。
+        if (this.story.scenes.length == 0) {
             this.listenMouse(false);
             this.optionShow(false);
             this.dialogContent.string = "進入戰鬥場景!!!"
             this.currentState = StoryState.SS_FIGHTING;
         }
 
-        let scene: { events: Ievents[] } | IScene = this.story.scene[0];
+        let scene: IScene | IEvent | IDialog = this.story.scenes[0];
 
-        // 如果 story 下一個讀出來是 event ，那就進入 event 處理邏輯。
-        if ("events" in scene) {
-            //! speak 跟 delay 還沒做
+        // event 邏輯
+        if (scene.type == "event") {
             this.listenMouse(false); // 關閉滑鼠事件
-            this.story.scene.shift(); // 把 event 退出來    
-            while (scene.events.length > 0) {
-                let customEvent = scene.events.shift();
-                console.log("play:" + customEvent.id);
+            this.story.scenes.shift(); // 把 event 退出來   
+            const cEvent = scene; // 修正 scene 有可能被取代成別的型別的問題
+            console.log("play:" + cEvent.id);
 
-                // 講話
-                if (customEvent.speak) {
-                    this.dialogContent.string = customEvent.speak;
-                    this.textShowerRandy?.active(true);
-                }
-
-                // 動畫及延遲
-                setTimeout(() => {
-                    this.node.emit(customEvent.id); // 告訴所有人要播哪個動畫
-                }, customEvent.aniDelay ?? 0);
-            }
-            return
-        }
-
-        // 處理 option 沒有或 speak 沒有的問題
-        if (!scene.options[0].option) {
-            scene.options[0].option = scene.options[0].speak
-            scene.options[1].option = scene.options[1].speak
-            if (scene.options[2]) scene.options[2].option = scene.options[2].speak
-        }
-        if (!scene.options[0].speak) {
-            scene.options[0].speak = scene.options[0].option
-            scene.options[1].speak = scene.options[1].option
-            if (scene.options[2]) scene.options[2].speak = scene.options[2].option
-        }
-
-        switch (this.currentState) {
-            case StoryState.SS_SITUATION:
-                this.listenMouse(true);
-                this.optionShow(false);
-                this.dialogContent.string = scene.situation;
-                this.toggleNextPageHint(true);
-                // this.roleSpeaking(false);
-                break;
-            case StoryState.SS_OPTION:
-
-                this.toggleNextPageHint(false);
-                this.listenMouse(false);
-                this.optionShow(true);
-                this.dialogContent.node.active = false;
-
-                this.option1Button.getComponentInChildren(Label).string = scene.options[0].role + ": " + scene.options[0].option;
-                this.option2Button.getComponentInChildren(Label).string = scene.options[1].role + ": " + scene.options[1].option;
-                scene.options[2] ? this.option3Button.getComponentInChildren(Label).string = scene.options[2].role + ": " + scene.options[2].option : this.option3Button.active = false;
-
-                break;
-            case StoryState.SS_SPEAKING:
-                setTimeout(() => {
-                    this.listenMouse(true);
-                }, 500);
-                this.choseArrow.active = false;
-                this.optionShow(false);
-                this.dialogContent.string = scene.options[this.currentChoseOption].speak;
+            // 講話
+            if (cEvent.speak) {
+                this.dialogContent.string = cEvent.speak;
                 this.textShowerRandy?.active(true);
-                this.roleSpeaking(true, this._choseRole(scene.options[this.currentChoseOption].role));
-                break;
-            case StoryState.SS_SPEAKING_END:
-                this.optionShow(false);
-                this.dialogContent.node.active = true;
-                this.textShowerRandy?.unscheduleAllCallbacks();
-                this.dialogContent.string = scene.options[this.currentChoseOption].speak;
-                this.roleSpeaking(false, this._choseRole(scene.options[this.currentChoseOption].role));
-                this.toggleNextPageHint(true);
-                break;
-            case StoryState.SS_CHECK_CHII:
-                this.toggleNextPageHint(false);
-                this.dialogContent.node.active = true;
-                this.dialogContent.string = scene.chii;
-                this.story.scene.shift();
-                // this.roleSpeaking(true, this.chii);
-                this.updateState(StoryState.SS_SITUATION);
-                break;
+            }
+
+            // 動畫及延遲
+            setTimeout(() => {
+                this.node.emit(cEvent.id); // 告訴所有人要播哪個動畫
+            }, cEvent.aniDelay ?? 0);
+        }
+
+        // dialog 邏輯
+        else if (scene.type == "dialog") {
+            this.story.scenes.shift(); // 把 dialog 退出來 
+            this.updateState(StoryState.SS_DIALOG); // 切換到 dialog 專用的狀態
+            this.listenMouse(true); // 開啟滑鼠事件
+            this._dialogs = scene; // 把 dialogs 存起來
+            this.readDialogs(); // recursive 讀取 dialog
+        }
+
+        // scene 邏輯
+        else {
+            // 處理 option 沒有或 speak 沒有的問題
+            if (!scene.options[0].speak) {
+                scene.options[0].speak = scene.options[0].option
+                scene.options[1].speak = scene.options[1].option
+                if (scene.options[2]) scene.options[2].speak = scene.options[2].option
+            }
+
+            switch (this.currentState) {
+                case StoryState.SS_SITUATION:
+                    if (!scene.situation) this.updateState(StoryState.SS_OPTION);
+                    this.optionShow(false);
+                    // this.dialogContent.string = scene.situation;
+                    // this.roleSpeaking(false);
+                    this.situationMask.active = true;
+                    this.situationLabel.active = true;
+                    this.situationLabel.getComponent(Label).string = scene.situation;
+                    this.situationLabel.getComponent(Animation).play("Word_Pop");
+                    setTimeout(() => {
+                        this.toggleNextPageHint(true);
+                        this.listenMouse(true);
+                    }, this.situationLabel.getComponent(Animation).getState("Word_Pop").duration * 1000);
+                    break;
+                case StoryState.SS_OPTION:
+                    this.situationLabel.active = false;
+                    this.situationMask.active = false;
+                    this.toggleNextPageHint(false);
+                    this.listenMouse(false);
+                    this.optionShow(true);
+                    this.dialogContent.node.active = false;
+
+                    this.option1Button.getComponentInChildren(Label).string = scene.options[0].role + ": " + scene.options[0].option;
+                    this.option2Button.getComponentInChildren(Label).string = scene.options[1].role + ": " + scene.options[1].option;
+                    scene.options[2] ? this.option3Button.getComponentInChildren(Label).string = scene.options[2].role + ": " + scene.options[2].option : this.option3Button.active = false;
+
+                    break;
+                case StoryState.SS_SPEAKING:
+                    setTimeout(() => {
+                        this.listenMouse(true);
+                    }, 500);
+                    this.choseArrow.active = false;
+                    this.optionShow(false);
+                    this.dialogContent.string = scene.options[this.currentChoseOption].speak;
+                    this.textShowerRandy?.active(true);
+                    this.roleSpeaking(true, this._choseRole(scene.options[this.currentChoseOption].role));
+                    break;
+                case StoryState.SS_SPEAKING_END:
+                    this.toggleNextPageHint(true);
+                    this.optionShow(false);
+                    this.dialogContent.node.active = true;
+                    this.textShowerRandy?.unscheduleAllCallbacks();
+                    this.dialogContent.string = scene.options[this.currentChoseOption].speak;
+                    this.roleSpeaking(false, this._choseRole(scene.options[this.currentChoseOption].role));
+                    break;
+                case StoryState.SS_CHECK_CHII:
+                    this.toggleNextPageHint(false);
+                    this.story.scenes.shift();
+                    // this.roleSpeaking(true, this.chii);
+                    this.updateState(StoryState.SS_SITUATION);
+                    break;
+            }
         }
     }
 
     start() {
         this.speakingMask.active = false;
+        this.optionShow(false);
         // 監聽打字打完沒
         // this.textShowerRandy?.node.on('textingEnd', this.textingEnd, this);
 
@@ -187,6 +217,34 @@ export class GameManager extends Component {
         if (this.jsonStory) this.story = this.jsonStory.json as IStory;
         // 從第一個場景開始
         this.updateState(StoryState.SS_SITUATION);
+    }
+
+    private _dialogs: IDialog | null = null // 暫存要播的對話
+    private readDialogs() {
+        if (!this._dialogs) return; // 沒有對話就返回
+
+        if (this.currentState == StoryState.SS_DIALOG) {//對話還沒開始播 = 播對話
+            if (this._dialogs.dialogs.length == 0) { // 檢查還有沒有
+                this._dialogs = null;
+                this.updateState(StoryState.SS_SITUATION); // 繼續下個狀態
+            }
+            this.toggleNextPageHint(false);
+            this.dialogContent.string = this._dialogs.dialogs[0].speak;
+            this.textShowerRandy?.active(true);
+            this.roleSpeaking(true, this._choseRole(this._dialogs.dialogs[0].role));
+            this.updateState(StoryState.SS_DIALOGING);
+        } else if (this.currentState == StoryState.SS_DIALOGING) {// 對話播到一半 = 強制播完
+            this.dialogContent.string = this._dialogs.dialogs[0].speak;
+            this.textShowerRandy?.unscheduleAllCallbacks();
+            this.updateState(StoryState.SS_DIALOG_END);
+            this.readDialogs()
+        } else {// 對話播完
+            // 檢查還有沒有
+            this.roleSpeaking(false, this._choseRole(this._dialogs.dialogs[0].role));
+            this._dialogs.dialogs.shift();
+            this.toggleNextPageHint(true);
+            this.updateState(StoryState.SS_DIALOG);
+        }
     }
 
 
@@ -207,6 +265,9 @@ export class GameManager extends Component {
             }
             if (this.currentState == StoryState.SS_CHECK_CHII) {
                 return this.updateState(StoryState.SS_SITUATION)
+            }
+            if (this.currentState == StoryState.SS_DIALOG || this.currentState == StoryState.SS_DIALOGING || this.currentState == StoryState.SS_DIALOG_END) {
+                return this.readDialogs();
             }
         }
     }
@@ -242,7 +303,8 @@ export class GameManager extends Component {
      * @param role 傳入角色
      * @param speaking 傳入是否有在講話
      */
-    roleSpeaking(speaking: boolean, role: Node) {
+    roleSpeaking(speaking: boolean, role: Node | null) {
+        if (role == null) return;
         if (!speaking) {
             this.speakingMask.active = false;
             role.setSiblingIndex(this.speakingMask.getSiblingIndex() - 1);
