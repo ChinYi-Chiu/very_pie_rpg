@@ -171,8 +171,6 @@ export class GameManager extends Component {
         if (this.jsonStory) this.story = this.jsonStory.json as IStory;
         // 從第一個場景開始
         this.updateState(StoryState.SS_SITUATION);
-
-        this.nextPageHint.active = false;
     }
 
     private textingEnd() { this.updateState(StoryState.SS_SPEAKING_END) };
