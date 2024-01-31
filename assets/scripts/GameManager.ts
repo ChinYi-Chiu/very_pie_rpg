@@ -16,7 +16,7 @@ enum StoryState {
  * ! 注意，所有值為必填。
  */
 interface IStory {
-    scene: IScene[]
+    scene: ({ events: Ievents[] } | IScene)[]
 }
 interface IScene {//場景， queue 讀取。
     situation: string, //場景旁白
@@ -27,6 +27,12 @@ interface IScene {//場景， queue 讀取。
         speak: string, //講的話的文字
     }[]
     chii: string, //起哥狀態(旁白)
+}
+
+interface Ievents {
+    id: string, //動畫名稱
+    speak?: string, //講的話
+    aniDelay?: number //延遲時間
 }
 
 @ccclass('GameManager')
@@ -42,6 +48,8 @@ export class GameManager extends Component {
     public option2Button: Node | null = null;
     @property(Node)
     public option3Button: Node | null = null;
+    @property(Node)
+    public choseArrow: Node | null = null;
 
     // 對話 label
     @property(Label)
@@ -77,8 +85,33 @@ export class GameManager extends Component {
             this.currentState = StoryState.SS_FIGHTING;
         }
 
+        let scene: { events: Ievents[] } | IScene = this.story.scene[0];
 
-        let scene: IScene = this.story.scene[0];
+        // 如果 story 下一個讀出來是 event ，那就進入 event 處理邏輯。
+        if ("events" in scene) {
+            //! speak 跟 delay 還沒做
+            this.listenMouse(false); // 關閉滑鼠事件
+            this.story.scene.shift(); // 把 event 退出來
+            while (scene.events.length > 0) {
+                let customEvent = scene.events.shift();
+                console.log("play:" + customEvent.id);
+                this.node.emit(customEvent.id); // 告訴所有人要播哪個動畫
+            }
+            return
+        }
+
+        // 處理 option 沒有或 speak 沒有的問題
+        if (!scene.options[0].option) {
+            scene.options[0].option = scene.options[0].speak
+            scene.options[1].option = scene.options[1].speak
+            if (scene.options[2]) scene.options[2].option = scene.options[2].speak
+        }
+        if (!scene.options[0].speak) {
+            scene.options[0].speak = scene.options[0].option
+            scene.options[1].speak = scene.options[1].option
+            if (scene.options[2]) scene.options[2].speak = scene.options[2].option
+        }
+
         switch (this.currentState) {
             case StoryState.SS_SITUATION:
                 this.listenMouse(true);
@@ -90,14 +123,17 @@ export class GameManager extends Component {
                 this.listenMouse(false);
                 this.optionShow(true);
                 this.dialogContent.node.active = false;
+
                 this.option1Button.getComponentInChildren(Label).string = scene.options[0].role + ": " + scene.options[0].option;
                 this.option2Button.getComponentInChildren(Label).string = scene.options[1].role + ": " + scene.options[1].option;
                 scene.options[2] ? this.option3Button.getComponentInChildren(Label).string = scene.options[2].role + ": " + scene.options[2].option : this.option3Button.active = false;
+
                 break;
             case StoryState.SS_SPEAKING:
                 setTimeout(() => {
                     this.listenMouse(true);
                 }, 500);
+                this.choseArrow.active = false;
                 this.optionShow(false);
                 this.dialogContent.string = scene.options[this.currentChoseOption].speak;
                 this.textShowerRandy?.active(true);
@@ -114,8 +150,8 @@ export class GameManager extends Component {
                 this.dialogContent.node.active = true;
                 this.dialogContent.string = scene.chii;
                 this.story.scene.shift();
-                this.roleSpeaking(true, this.chii);
-                // this.updateState(StoryState.SS_SITUATION);
+                // this.roleSpeaking(true, this.chii);
+                this.updateState(StoryState.SS_SITUATION);
                 break;
         }
     }
