@@ -288,7 +288,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "_ca4baa13-a237-4bdd-a967-dd581ea1e4c1",
+    "_name": "戶外打架背景",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -4491,7 +4491,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 33.213,
+      "x": 8.108,
       "y": 63.658,
       "z": 0
     },
