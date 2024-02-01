@@ -410,7 +410,7 @@
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "normal"
+    "path": "fight"
   },
   {
     "__type__": "cc.animation.Channel",
