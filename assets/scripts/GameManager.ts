@@ -20,7 +20,7 @@ enum StoryState {
  * 後面有 ? 的為選填項，除了選填項其他請務必一定要填入值
  */
 interface IStory {
-    scenes: (IScene | IEvent | IDialog)[]
+    scenes: (IScene | IEvent | IDialog )[]
 }
 interface IScene { //場景
     type: "scene",
@@ -153,18 +153,21 @@ export class GameManager extends Component {
 
             switch (this.currentState) {
                 case StoryState.SS_SITUATION:
-                    if (!scene.situation) this.updateState(StoryState.SS_OPTION);
-                    this.optionShow(false);
-                    // this.dialogContent.string = scene.situation;
-                    // this.roleSpeaking(false);
-                    this.situationMask.active = true;
-                    this.situationLabel.active = true;
-                    this.situationLabel.getComponent(Label).string = scene.situation;
-                    this.situationLabel.getComponent(Animation).play("Word_Pop");
-                    setTimeout(() => {
-                        this.toggleNextPageHint(true);
-                        this.listenMouse(true);
-                    }, this.situationLabel.getComponent(Animation).getState("Word_Pop").duration * 1000);
+                    if (scene.situation=="") {
+                        this.updateState(StoryState.SS_OPTION);
+                    }else{
+                        this.optionShow(false);
+                        // this.dialogContent.string = scene.situation;
+                        // this.roleSpeaking(false);
+                        this.situationMask.active = true;
+                        this.situationLabel.active = true;
+                        this.situationLabel.getComponent(Label).string = scene.situation;
+                        this.situationLabel.getComponent(Animation).play("Word_Pop");
+                        setTimeout(() => {
+                            this.toggleNextPageHint(true);
+                            this.listenMouse(true);
+                        }, this.situationLabel.getComponent(Animation).getState("Word_Pop").duration * 1000);
+                    }
                     break;
                 case StoryState.SS_OPTION:
                     this.situationLabel.active = false;
@@ -298,6 +301,8 @@ export class GameManager extends Component {
         this.updateState(StoryState.SS_SPEAKING);
     }
 
+
+    
     /**
      * 當角色在講話時要做的事
      * @param role 傳入角色
