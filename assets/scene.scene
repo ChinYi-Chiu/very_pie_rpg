@@ -137,7 +137,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 640,
+      "x": 640.959409594096,
       "y": 360.00000000000006,
       "z": 0
     },
@@ -223,7 +223,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 413.57702349869453,
+    "_orthoHeight": 360,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -1465,15 +1465,19 @@
     "playOnLoad": false,
     "_clips": [
       {
-        "__uuid__": "0d554761-ffa3-4114-af2b-0eb83595975b",
+        "__uuid__": "6ae43dda-76fc-46d6-aa5c-eef5f3e3477a",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "48f942d5-f726-428c-b99c-a69181ad9f29",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "0d554761-ffa3-4114-af2b-0eb83595975b",
+      "__uuid__": "48f942d5-f726-428c-b99c-a69181ad9f29",
       "__expectedType__": "cc.AnimationClip"
     },
-    "_id": "a5GdynCIVAGIvulXBAi4Od"
+    "_id": "06rBU1TUhDm5Tcw1Hy27er"
   },
   {
     "__type__": "cc.Node",
@@ -4163,8 +4167,12 @@
     "start_page": {
       "__id__": 35
     },
-    "girlwalkaway": null,
-    "girlwalkin": null,
+    "girlwalkaway": {
+      "__id__": 35
+    },
+    "girlwalkin": {
+      "__id__": 35
+    },
     "_id": "30BVCBzKVCuK1AnFRfk8rI"
   },
   {
@@ -4632,7 +4640,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1280,
+      "width": 1281.918819188192,
       "height": 720
     },
     "_anchorPoint": {
