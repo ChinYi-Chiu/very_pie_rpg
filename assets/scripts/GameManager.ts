@@ -78,6 +78,8 @@ export class GameManager extends Component {
     private anan: Node | null = null;
     @property(Node)
     private chii: Node | null = null;
+    @property(Node)
+    private none: Node | null = null;
 
     // 下一頁提示(拳頭)
     @property(Node)
@@ -341,6 +343,9 @@ export class GameManager extends Component {
                 break;
             case "chii":
                 return this.chii;
+                break;
+            case "none":
+                return this.none;
                 break;
         }
         return this.node;
