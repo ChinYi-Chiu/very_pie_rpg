@@ -21,7 +21,7 @@ export class AnimationKeyframe extends Component {
     @property(Node)
     public Sack: Node = null;
 
-    private playAnimation(nodePath: string, animationName: string) {
+    /*private playAnimation(nodePath: string, animationName: string) {
         const bodyNode = find(nodePath);
         if (bodyNode) {
           const animation = bodyNode.getComponent(Animation);
@@ -29,10 +29,10 @@ export class AnimationKeyframe extends Component {
             animation.play(animationName);
           }
         }
-    }
+    }*/
     
     private setActive(node: Node, isActive: boolean) {
-        if (node) {
+        if (node != null) {
             node.active = isActive;
         }
     }
@@ -47,7 +47,7 @@ export class AnimationKeyframe extends Component {
 
     //???
     BleedAnime_ChangeSprite(){
-
+        
         this.textShower.showText = "起哥:古人說過，忍無可忍，無須再忍。超派!!!!!!";
         this.textShower.OnShowTextOneByOne();
 
@@ -57,6 +57,13 @@ export class AnimationKeyframe extends Component {
         this.setActive(this.Chii_fight, false);
         this.setActive(this.Chair, false);
         this.setActive(this.Sack, false);
+    }
+    
+    EndingA_Start_ChiiSpeeking(){
+
+        this.textShower.showText = "我的師父都是有20~30年經驗的日料師傅,做出來的東西怎麼可能難吃...";
+        this.textShower.OnShowTextOneByOne();
+
     }
 
 }
