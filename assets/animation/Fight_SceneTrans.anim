@@ -68,7 +68,7 @@
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "Chii/FullBodyPortrait"
+    "path": "Tozy/body"
   },
   {
     "__type__": "cc.animation.Channel",
@@ -87,7 +87,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 280.02099609375,
+        "value": -275.7539978027344,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -244,7 +244,7 @@
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "Sprite"
+    "path": "Foregorund/黑屏"
   },
   {
     "__type__": "cc.animation.ComponentPath",
@@ -450,7 +450,7 @@
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "Tozy/body"
+    "path": "Chii/Chii_normal"
   },
   {
     "__type__": "cc.animation.Channel",
@@ -469,7 +469,7 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": -275.754,
+        "value": 280.02099609375,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
@@ -550,40 +550,8 @@
   },
   {
     "__type__": "cc.RealCurve",
-    "_times": [
-      0,
-      0.8333333333333334
-    ],
-    "_values": [
-      {
-        "__type__": "cc.RealKeyframeValue",
-        "interpolationMode": 0,
-        "tangentWeightMode": 0,
-        "value": 0,
-        "rightTangent": 0,
-        "rightTangentWeight": 1,
-        "leftTangent": 0,
-        "leftTangentWeight": 1,
-        "easingMethod": 0,
-        "__editorExtras__": {
-          "tangentMode": 0
-        }
-      },
-      {
-        "__type__": "cc.RealKeyframeValue",
-        "interpolationMode": 0,
-        "tangentWeightMode": 0,
-        "value": 0,
-        "rightTangent": 0,
-        "rightTangentWeight": 1,
-        "leftTangent": 0,
-        "leftTangentWeight": 1,
-        "easingMethod": 0,
-        "__editorExtras__": {
-          "tangentMode": 0
-        }
-      }
-    ],
+    "_times": [],
+    "_values": [],
     "preExtrapolation": 1,
     "postExtrapolation": 1
   },

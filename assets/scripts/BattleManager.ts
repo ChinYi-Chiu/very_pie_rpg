@@ -125,8 +125,8 @@ toyz 背對衣服掀起
   //超派鐵拳(扣1/3血)
   public Pie() {
     if (this.isDodging) {
-      this.playAnimation("Canvas/Node/Tozy/body", "Fight_Dodge");
-      this.playAnimation("Canvas/Tozy_Dodge", "Fight_ChiiFist");
+      this.playAnimation("Canvas/Visual/Tozy/body", "Fight_Dodge");
+      this.playAnimation("Canvas/Visual/Tozy_Dodge", "Fight_ChiiFist");
       this.textShower.showText = "你躲掉起哥的攻擊了";
       this.textShower.OnShowTextOneByOne();
       this.nextChiiStep = this.Bag;
@@ -142,7 +142,7 @@ toyz 背對衣服掀起
     if (!this.isSacking) {
       this.textShower.showText = "你的眼前一片黑暗";
       this.textShower.OnShowTextOneByOne();
-      this.playAnimation("Canvas/Tozy_Sack", "Fight_Sack");
+      this.playAnimation("Canvas/Visual/Tozy_Sack", "Fight_Sack");
       this.isSacking = true;
     } else {
       this.nextChiiStep = this.ChairAttack;
@@ -155,7 +155,7 @@ toyz 背對衣服掀起
     //Demo版其實也不用扣了，直接打死\
     this.textShower.showText = "起哥抄起椅子把你打暈了";
     this.textShower.OnShowTextOneByOne();
-    this.playAnimation("Canvas/Tozy_Chair", `Fight_ChiiChair`);
+    this.playAnimation("Canvas/Visual/Tozy_Chair", `Fight_ChiiChair`);
     this.TryKillTozy(3);
     tween(this.TozyHPBar);
     /*
@@ -180,7 +180,7 @@ toyz 背對衣服掀起
     tween(this.TozyHPBar)
       .to(1, { progress: this.TozyHP })
       .call(() => {
-        if (isDie) this.playAnimation("Canvas/Foregorund", `Fight_Bleed`);
+        if (isDie) this.playAnimation("Canvas/Visual/Foregorund", `Fight_Bleed`);
       })
       .start();
     return isDie;
