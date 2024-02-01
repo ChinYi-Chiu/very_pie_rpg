@@ -25,6 +25,26 @@ export class AnimationController extends Component {
                 this.gameManager.updateUI(); // 播完動畫，進入下一個場景
             }, this.chii.getState("chiiComing").duration * 1000);
         }, this);
+
+        // 開始播放anan走出去的動畫。
+        this.gameManager?.node.on('girlwalkaway', (ev: Event) => {
+            this.girlwalkaway.play("girlwalkaway"); //播動畫
+            this.audioController.play("chiiWalking"); //播音樂
+            setTimeout(() => { //等動畫播完後做其他事
+                this.audioController.stop("chiiWalking"); //音樂停
+                this.gameManager.updateUI(); // 播完動畫，進入下一個場景
+            }, this.girlwalkaway.getState("girlwalkaway").duration * 1000);
+        }, this);
+
+        // 開始播放anan走進來的動畫。
+        this.gameManager?.node.on('girlwalkin', (ev: Event) => {
+            this.girlwalkin.play("girlwalkin"); //播動畫
+            this.audioController.play("chiiWalking"); //播音樂
+            setTimeout(() => { //等動畫播完後做其他事
+                this.audioController.stop("chiiWalking"); //音樂停
+                this.gameManager.updateUI(); // 播完動畫，進入下一個場景
+            }, this.girlwalkin.getState("girlwalkin").duration * 1000);
+        }, this);
     }
 
     update(deltaTime: number) {
@@ -41,6 +61,12 @@ export class AnimationController extends Component {
 
     @property(Animation)
     start_page: Animation|null=null;
+
+    @property(Animation)
+    girlwalkaway: Animation|null=null;
+
+    @property(Animation)
+    girlwalkin: Animation|null=null;
 
 }
 
