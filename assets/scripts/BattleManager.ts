@@ -140,7 +140,7 @@ toyz 背對衣服掀起
   //蓋布袋(使致盲無法行動)
   public Bag() {
     if (!this.isSacking) {
-      this.textShower.showText = "你的眼前一片黑暗";
+      this.textShower.showText = "你無法躲開蓋布袋,現在眼前一片黑暗";
       this.textShower.OnShowTextOneByOne();
       this.playAnimation("Canvas/Visual/Tozy_Sack", "Fight_Sack");
       this.isSacking = true;
@@ -178,7 +178,7 @@ toyz 背對衣服掀起
     isDie = this.TozyHP <= 0;
     if (isDie) this.TozyHP = 0;
     tween(this.TozyHPBar)
-      .to(1, { progress: this.TozyHP })
+      .to(4, { progress: this.TozyHP })
       .call(() => {
         if (isDie) this.playAnimation("Canvas/Visual/Foregorund", `Fight_Bleed`);
       })
