@@ -12,6 +12,8 @@ enum StoryState {
     SS_DIALOG, // dialog 專用的狀態
     SS_DIALOGING, // dialog 專用的狀態
     SS_DIALOG_END, // dialog 專用的狀態
+    SS_POP,
+    SS_POP_END,
 }
 
 /**
@@ -20,7 +22,7 @@ enum StoryState {
  * 後面有 ? 的為選填項，除了選填項其他請務必一定要填入值
  */
 interface IStory {
-    scenes: (IScene | IEvent | IDialog )[]
+    scenes: (IScene | ISituation_Pop | IEvent | IDialog )[]
 }
 interface IScene { //場景
     type: "scene",
@@ -31,6 +33,10 @@ interface IScene { //場景
         option: string, //選項的文字
         speak?: string, //講的話的文字
     }[]
+}
+interface ISituation_Pop{
+    type: "pop",
+    situation: string
 }
 interface IEvent { //事件(動畫)
     type: "event",
@@ -114,7 +120,7 @@ export class GameManager extends Component {
             this.currentState = StoryState.SS_FIGHTING;
         }
 
-        let scene: IScene | IEvent | IDialog = this.story.scenes[0];
+        let scene: IScene | ISituation_Pop | IEvent | IDialog = this.story.scenes[0];
 
         // event 邏輯
         if (scene.type == "event") {
@@ -142,6 +148,31 @@ export class GameManager extends Component {
             this.listenMouse(true); // 開啟滑鼠事件
             this._dialogs = scene; // 把 dialogs 存起來
             this.readDialogs(); // recursive 讀取 dialog
+        }
+
+        // situation_pop 邏輯
+        else if(scene.type == "pop"){
+            if(this.currentState==StoryState.SS_POP_END){
+                this.story.scenes.shift(); // 把 situation_pop 退出來
+                this.situationLabel.active = false;
+                this.situationMask.active = false;
+                this.toggleNextPageHint(false);
+                this.updateState(StoryState.SS_SITUATION);
+            }else if(this.currentState!=StoryState.SS_POP){
+                this.listenMouse(false);
+                this.optionShow(false);
+                // this.dialogContent.string = scene.situation;
+                // this.roleSpeaking(false);
+                this.situationMask.active = true;
+                this.situationLabel.active = true;
+                this.situationLabel.getComponent(Label).string = scene.situation;
+                this.situationLabel.getComponent(Animation).play("Word_Pop");
+                setTimeout(() => {
+                    this.toggleNextPageHint(true);
+                    this.listenMouse(true);
+                }, this.situationLabel.getComponent(Animation).getState("Word_Pop").duration * 1000);
+                this.updateState(StoryState.SS_POP);
+            }
         }
 
         // scene 邏輯
@@ -178,11 +209,10 @@ export class GameManager extends Component {
                     this.listenMouse(false);
                     this.optionShow(true);
                     this.dialogContent.node.active = false;
-
                     this.option1Button.getComponentInChildren(Label).string = scene.options[0].role + ": " + scene.options[0].option;
                     this.option2Button.getComponentInChildren(Label).string = scene.options[1].role + ": " + scene.options[1].option;
                     scene.options[2] ? this.option3Button.getComponentInChildren(Label).string = scene.options[2].role + ": " + scene.options[2].option : this.option3Button.active = false;
-
+                    //this.roleSpeaking(true,this._choseRole(scene.options[this.currentChoseOption].role));
                     break;
                 case StoryState.SS_SPEAKING:
                     setTimeout(() => {
@@ -274,6 +304,9 @@ export class GameManager extends Component {
             if (this.currentState == StoryState.SS_DIALOG || this.currentState == StoryState.SS_DIALOGING || this.currentState == StoryState.SS_DIALOG_END) {
                 return this.readDialogs();
             }
+            if (this.currentState == StoryState.SS_POP) {
+                return this.updateState(StoryState.SS_POP_END);
+            }
         }
     }
 
@@ -332,6 +365,34 @@ export class GameManager extends Component {
         // 重複搖，搖到死，搖到他媽變單親媽媽。
         tween(role).repeat(Number.MAX_VALUE, t).start();
     }
+
+    /**
+     * 當角色在選擇時的表現
+     * @param state 選擇狀態(是否選擇完畢)
+     * @param role 傳入角色
+     */
+    /*roleChoosing(state: boolean,role: Node | null) {
+        if (role == null) return;
+        if (!state) {
+            this.speakingMask.active = false;
+            role.setSiblingIndex(this.speakingMask.getSiblingIndex() - 1);
+            return Tween.stopAllByTarget(role);
+        }
+        this.speakingMask.active = true;
+        role.setSiblingIndex(this.speakingMask.getSiblingIndex());
+        let t = tween(role)
+             .target(role)
+            .to(0.1, {
+                position: new Vec3(role.position.x, role.position.y + 5, role.position.z)
+            })
+            .to(0.1, {
+                position: new Vec3(role.position.x, role.position.y - 5, role.position.z)
+            })
+            .start()
+
+        // 重複搖，搖到死，搖到他媽變單親媽媽。
+        tween(role).repeat(Number.MAX_VALUE, t).start();
+    }*/
 
     private _choseRole(role: string): Node {
         switch (role) {
