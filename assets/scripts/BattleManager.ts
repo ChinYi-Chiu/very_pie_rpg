@@ -178,7 +178,7 @@ toyz 背對衣服掀起
     isDie = this.TozyHP <= 0;
     if (isDie) this.TozyHP = 0;
     tween(this.TozyHPBar)
-      .to(4, { progress: this.TozyHP })
+      .to(3, { progress: this.TozyHP })
       .call(() => {
         if (isDie) this.playAnimation("Canvas/Visual/Foregorund", `Fight_Bleed`);
       })
