@@ -96,6 +96,8 @@ export class GameManager extends Component {
     private speakingMask: Node | null = null;
     @property(Node)
     private situationMask: Node | null = null;
+    @property(Node)
+    private sceneTransMask: Node | null = null;
 
     // 情境大字
     @property(Node)
@@ -117,6 +119,8 @@ export class GameManager extends Component {
             this.listenMouse(false);
             this.optionShow(false);
             this.dialogContent.string = "進入戰鬥場景!!!"
+            const animation = this.sceneTransMask.getComponent(Animation);
+            animation.play("Indoor_SceneTrans");
             this.currentState = StoryState.SS_FIGHTING;
         }
 

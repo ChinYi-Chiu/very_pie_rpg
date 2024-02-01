@@ -39,6 +39,7 @@ export class AnimationKeyframe extends Component {
 
     //ScenesTransition
     onTransitionFinished() {
+        console.log("123");
         director.loadScene('FightScene');
     }
     BleedAnime_End(){
