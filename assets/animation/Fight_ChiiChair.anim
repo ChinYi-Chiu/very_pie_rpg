@@ -11,7 +11,7 @@
     "speed": 1,
     "wrapMode": 1,
     "enableTrsBlending": false,
-    "_duration": 0.25,
+    "_duration": 0.5,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -30,13 +30,13 @@
     "_exoticAnimation": null,
     "_events": [
       {
-        "frame": 0.25,
+        "frame": 0.5,
         "func": "",
         "params": []
       },
       {
-        "frame": 0.25,
-        "func": "OnChairAniEnd",
+        "frame": 0.5,
+        "func": "ChairAnimeEnd",
         "params": []
       }
     ],
@@ -135,7 +135,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -176,7 +176,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -255,7 +255,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -296,7 +296,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -337,7 +337,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -429,7 +429,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -470,7 +470,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {
@@ -511,7 +511,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      0.25
+      0.5
     ],
     "_values": [
       {

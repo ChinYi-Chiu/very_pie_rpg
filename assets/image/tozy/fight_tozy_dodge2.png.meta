@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "99ff4a2f-40d1-49f6-9852-ca09e733e93d",
+  "uuid": "b78d69b0-a18d-496e-90a9-06342617cab3",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "99ff4a2f-40d1-49f6-9852-ca09e733e93d@6c48a",
-      "displayName": "敗北動作",
+      "uuid": "b78d69b0-a18d-496e-90a9-06342617cab3@6c48a",
+      "displayName": "fight_tozy_dodge2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "99ff4a2f-40d1-49f6-9852-ca09e733e93d",
+        "imageUuidOrDatabaseUri": "b78d69b0-a18d-496e-90a9-06342617cab3",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,22 +34,22 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "99ff4a2f-40d1-49f6-9852-ca09e733e93d@f9941",
-      "displayName": "敗北動作",
+      "uuid": "b78d69b0-a18d-496e-90a9-06342617cab3@f9941",
+      "displayName": "fight_tozy_dodge2",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 1024,
-        "height": 1024,
-        "rawWidth": 1024,
-        "rawHeight": 1024,
+        "offsetX": -4,
+        "offsetY": -111.5,
+        "trimX": 296,
+        "trimY": 274,
+        "width": 217,
+        "height": 279,
+        "rawWidth": 817,
+        "rawHeight": 604,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -61,17 +61,17 @@
         "meshType": 0,
         "vertices": {
           "rawPosition": [
-            -512,
-            -512,
+            -108.5,
+            -139.5,
             0,
-            512,
-            -512,
+            108.5,
+            -139.5,
             0,
-            -512,
-            512,
+            -108.5,
+            139.5,
             0,
-            512,
-            512,
+            108.5,
+            139.5,
             0
           ],
           "indexes": [
@@ -83,38 +83,38 @@
             3
           ],
           "uv": [
-            0,
-            1024,
-            1024,
-            1024,
-            0,
-            0,
-            1024,
-            0
+            296,
+            330,
+            513,
+            330,
+            296,
+            51,
+            513,
+            51
           ],
           "nuv": [
-            0,
-            0,
-            1,
-            0,
-            0,
-            1,
-            1,
-            1
+            0.3623011015911873,
+            0.08443708609271523,
+            0.627906976744186,
+            0.08443708609271523,
+            0.3623011015911873,
+            0.5463576158940397,
+            0.627906976744186,
+            0.5463576158940397
           ],
           "minPos": [
-            -512,
-            -512,
+            -108.5,
+            -139.5,
             0
           ],
           "maxPos": [
-            512,
-            512,
+            108.5,
+            139.5,
             0
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "99ff4a2f-40d1-49f6-9852-ca09e733e93d@6c48a",
+        "imageUuidOrDatabaseUri": "b78d69b0-a18d-496e-90a9-06342617cab3@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "99ff4a2f-40d1-49f6-9852-ca09e733e93d@f9941"
+    "redirect": "b78d69b0-a18d-496e-90a9-06342617cab3@f9941"
   }
 }

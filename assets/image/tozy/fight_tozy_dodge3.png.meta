@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "b78d69b0-a18d-496e-90a9-06342617cab3",
+  "uuid": "c47fd4db-bc2e-49d8-8465-8469f1495072",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "b78d69b0-a18d-496e-90a9-06342617cab3@6c48a",
-      "displayName": "fight_tozy2",
+      "uuid": "c47fd4db-bc2e-49d8-8465-8469f1495072@6c48a",
+      "displayName": "fight_tozy_dodge3",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "b78d69b0-a18d-496e-90a9-06342617cab3",
+        "imageUuidOrDatabaseUri": "c47fd4db-bc2e-49d8-8465-8469f1495072",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "b78d69b0-a18d-496e-90a9-06342617cab3@f9941",
-      "displayName": "fight_tozy2",
+      "uuid": "c47fd4db-bc2e-49d8-8465-8469f1495072@f9941",
+      "displayName": "fight_tozy_dodge3",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b78d69b0-a18d-496e-90a9-06342617cab3@6c48a",
+        "imageUuidOrDatabaseUri": "c47fd4db-bc2e-49d8-8465-8469f1495072@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "b78d69b0-a18d-496e-90a9-06342617cab3@f9941"
+    "redirect": "c47fd4db-bc2e-49d8-8465-8469f1495072@f9941"
   }
 }
