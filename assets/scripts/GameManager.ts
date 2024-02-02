@@ -50,7 +50,7 @@ interface IDialog { //對話
         role: string, //說話的角色
         speak: string, //說的話
     }[]
-}
+} 
 
 @ccclass('GameManager')
 export class GameManager extends Component {
@@ -115,14 +115,12 @@ export class GameManager extends Component {
 
     updateUI() {
         // 如果沒有 scene 了，那就代表所有 rpg 都走完了，切換到戰鬥場面。
-        if (this.story.scenes.length == 0) {
+        /*if (this.story.scenes.length == 0) {
             this.listenMouse(false);
             this.optionShow(false);
             this.dialogContent.string = "進入戰鬥場景!!!"
-            const animation = this.sceneTransMask.getComponent(Animation);
-            animation.play("Indoor_SceneTrans");
             this.currentState = StoryState.SS_FIGHTING;
-        }
+        }*/
 
         let scene: IScene | ISituation_Pop | IEvent | IDialog = this.story.scenes[0];
 

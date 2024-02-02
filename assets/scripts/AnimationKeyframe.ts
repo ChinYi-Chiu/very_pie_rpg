@@ -38,10 +38,10 @@ export class AnimationKeyframe extends Component {
     }
 
     //ScenesTransition
-    onTransitionFinished() {
-        console.log("123");
+    /*onTransitionFinished() {
         director.loadScene('FightScene');
-    }
+    }*/
+
     BleedAnime_End(){
         director.loadScene('EndingA');
     }

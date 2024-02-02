@@ -627,6 +627,12 @@
         }
         
       ]
+    },
+    {
+      "type": "event",
+      "id": "Indoor_SceneTrans_End",
+      "speak": "進入戰鬥場景!!!",
+      "aniDelay": 2000
     }
   ]
 }

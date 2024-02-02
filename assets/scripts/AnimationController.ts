@@ -1,4 +1,4 @@
-import { _decorator, Animation, AnimationClip, Component, Event, Node } from 'cc';
+import { _decorator, Animation, AnimationClip, Component, Event, Node, director } from 'cc';
 import { GameManager } from './GameManager';
 import { AudioController } from './AudioController';
 const { ccclass, property } = _decorator;
@@ -45,6 +45,15 @@ export class AnimationController extends Component {
                 this.gameManager.updateUI(); // 播完動畫，進入下一個場景
             }, this.girlwalkin.getState("girlwalkin").duration * 1000);
         }, this);
+
+        // 開始撥放 Indoor_SceneTrans_End 這個動畫
+        this.gameManager?.node.on('Indoor_SceneTrans_End', (ev: Event) => {
+            this.end.play("Indoor_SceneTrans_End");//播動畫
+            setTimeout(() => { //等動畫播完後做其他事
+                director.loadScene('FightScene');//轉換到戰鬥場景
+            }, this.end.getState("Indoor_SceneTrans_End").duration * 1000);
+        }, this);
+        
     }
 
     update(deltaTime: number) {
@@ -68,6 +77,8 @@ export class AnimationController extends Component {
     @property(Animation)
     girlwalkin: Animation|null=null;
 
+    @property(Animation)
+    end: Animation|null=null;
 }
 
 

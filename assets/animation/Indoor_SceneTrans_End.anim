@@ -11,7 +11,7 @@
     "speed": 1,
     "wrapMode": 1,
     "enableTrsBlending": false,
-    "_duration": 3,
+    "_duration": 2.6666666666666665,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -27,12 +27,12 @@
     "_exoticAnimation": null,
     "_events": [
       {
-        "frame": 3,
+        "frame": 2.6666666666666665,
         "func": "",
         "params": []
       },
       {
-        "frame": 3,
+        "frame": 2.6666666666666665,
         "func": "onTransitionFinished",
         "params": []
       }
@@ -84,7 +84,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      3
+      2.6666666666666665
     ],
     "_values": [
       {
@@ -125,7 +125,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      3
+      2.6666666666666665
     ],
     "_values": [
       {
@@ -412,7 +412,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      3
+      2.6666666666666665
     ],
     "_values": [
       {
@@ -453,7 +453,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      3
+      2.6666666666666665
     ],
     "_values": [
       {
@@ -494,7 +494,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      3
+      2.6666666666666665
     ],
     "_values": [
       {
