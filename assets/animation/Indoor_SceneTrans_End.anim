@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "Indoor_SceneTrans",
+    "_name": "Indoor_SceneTrans_End",
     "_objFlags": 0,
     "__editorExtras__": {
       "embeddedPlayerGroups": []
@@ -11,7 +11,7 @@
     "speed": 1,
     "wrapMode": 1,
     "enableTrsBlending": false,
-    "_duration": 2.6666666666666665,
+    "_duration": 2,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -25,18 +25,7 @@
       }
     ],
     "_exoticAnimation": null,
-    "_events": [
-      {
-        "frame": 2.6666666666666665,
-        "func": "",
-        "params": []
-      },
-      {
-        "frame": 2.6666666666666665,
-        "func": "onTransitionFinished",
-        "params": []
-      }
-    ],
+    "_events": [],
     "_embeddedPlayers": [],
     "_additiveSettings": {
       "__id__": 31
@@ -84,7 +73,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      2.6666666666666665
+      2
     ],
     "_values": [
       {
@@ -125,7 +114,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      2.6666666666666665
+      2
     ],
     "_values": [
       {
@@ -194,7 +183,7 @@
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "黑屏"
+    "path": "Foreground"
   },
   {
     "__type__": "cc.animation.ComponentPath",
@@ -400,7 +389,7 @@
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "黑屏"
+    "path": "Foreground"
   },
   {
     "__type__": "cc.animation.Channel",
@@ -412,7 +401,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      2.6666666666666665
+      2
     ],
     "_values": [
       {
@@ -453,7 +442,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      2.6666666666666665
+      2
     ],
     "_values": [
       {
@@ -494,7 +483,7 @@
     "__type__": "cc.RealCurve",
     "_times": [
       0,
-      2.6666666666666665
+      2
     ],
     "_values": [
       {

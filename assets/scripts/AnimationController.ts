@@ -1,6 +1,7 @@
 import { _decorator, Animation, AnimationClip, Component, Event, Node, director } from 'cc';
 import { GameManager } from './GameManager';
 import { AudioController } from './AudioController';
+import { BattleManager_test } from './BattleManager_test';
 const { ccclass, property } = _decorator;
 
 @ccclass('AnimationController')

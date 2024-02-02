@@ -1,0 +1,49 @@
+{
+    "playerSkill": [
+      {
+        "id": "Dodge",
+        "type": "buff",
+        "speak": "Tozy使用了鬼之閃避,能閃過大部分8+9的拳頭。(持續一回合)",
+        "self_effect": "dodge",
+        "animation": "none"
+      }
+    ],
+    "chiiSkill": [
+      {
+        "id": "Pie",
+        "type": "attack",
+        "speak": "起哥使用了祖傳的超派鐵拳。",
+        "animation": "Fight_ChiiFist",
+        "damage": 1,
+        "dodge": {
+            "animation1": "Fight_ChiiFist",
+            "animation2": "Fight_Dodge",
+            "speak": "起哥使用了祖傳的超派鐵拳,但是Tozy巧妙地躲過了攻擊,因此起哥怒氣值上升。",
+            "opposite_effect": "rage_up",
+            "damage": 0
+          }
+      },
+      {
+        "id": "Sack",
+        "type": "attack",
+        "speak": "起哥使用了蓋布袋。",
+        "animation": "Fight_Sack",
+        "self_effect": "blind",
+        "damage": 0,
+        "dodge": {
+            "speak": "起哥使用了蓋布袋,Tozy想試著鬼之閃避,卻被抓了正著。"
+          }
+      },
+      {
+        "id": "Chair",
+        "type": "attack",
+        "speak": "起哥抄起椅子砸了過來",
+        "animation": "Fight_ChiiChair",
+        "damage": 1,
+        "blind": {
+            "speak": "起哥抄起椅子砸了過來,直接砸暈了Tozy。",
+            "damage": 3
+          }
+      }
+    ]
+  }
