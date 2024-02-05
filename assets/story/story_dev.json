@@ -10,8 +10,14 @@
       ]
     },
     {
+      "type": "event",
+      "id": "rice",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "scene",
-      "situation": "超派海鮮丼",
+      "situation": "",
       "options": [
         {
           "role": "tozy",
@@ -58,8 +64,14 @@
       ]
     },
     {
+      "type": "event",
+      "id": "egg",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "scene",
-      "situation": "茶碗蒸",
+      "situation": "",
       "options": [
         {
           "role": "tozy",
@@ -80,8 +92,14 @@
       ]
     },
     {
+      "type": "event",
+      "id": "fish",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "scene",
-      "situation": "烤鮭魚烤鰻魚",
+      "situation": "",
       "options": [
         {
           "role": "tozy",
@@ -128,16 +146,29 @@
       ]
     },
     {
+      "type": "event",
+      "id": "X",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "dialog",
       "dialogs": [
         {
           "role": "tozy",
           "speak": "你吃到什麼?"
-        },
-        {
-          "role": "anan",
-          "speak": "(小女孩狂按牌子)"
-        },
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "id": "X",
+      "speak": "(小女孩狂按牌子)",
+      "aniDelay": 20
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
         {
           "role": "tozy",
           "speak": "欸安安，你在皮要揍喔"
@@ -188,8 +219,14 @@
       ]
     },
     {
+      "type": "event",
+      "id": "sushi",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "scene",
-      "situation": "主廚壽司",
+      "situation": "",
       "options": [
         {
           "role": "tozy",
@@ -205,6 +242,12 @@
       ]
     },
     {
+      "type": "event",
+      "id": "shrimp",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "dialog",
       "dialogs": [
         {
@@ -215,7 +258,7 @@
     },
     {
       "type": "scene",
-      "situation": "烤大蝦",
+      "situation": "",
       "options": [
         {
           "role": "anan",
@@ -403,6 +446,12 @@
       "aniDelay": 2000
     },
     {
+      "type": "event",
+      "id": "chii_angry",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
       "type": "dialog",
       "dialogs": [
         {
@@ -436,7 +485,7 @@
           "option": "安安過來說:不可以吵架喔!",
           "speak": "不可以吵架喔!"
         }, {
-          "role": "tozy",
+          "role": "anan",
           "chiiFire": "down",
           "option": "安安過來說:你們快點打好不好，我有點困了",
           "speak": "你們快點打好不好，我有點困了"
@@ -572,6 +621,18 @@
       ]
     },
     {
+      "type": "event",
+      "id": "Back_Ground",
+      "speak": "(離開店家)",
+      "aniDelay": 20
+    },
+    {
+      "type": "event",
+      "id": "chii_up",
+      "speak": "(離開店家)",
+      "aniDelay": 20
+    },
+    {
       "type": "dialog",
       "dialogs": [
         {
@@ -627,6 +688,27 @@
         }
         
       ]
+    },
+    {
+      "type": "event",
+      "id": "stare",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "tozy",
+          "speak": "為甚麼要扯國籍，我搞不懂ㄟ"
+        } 
+      ]
+    },
+    {
+      "type": "event",
+      "id": "chii_fright",
+      "speak": "",
+      "aniDelay": 20
     },
     {
       "type": "event",
