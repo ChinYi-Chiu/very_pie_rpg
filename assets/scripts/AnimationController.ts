@@ -1,7 +1,7 @@
 import { _decorator, Animation, AnimationClip, JsonAsset, Component, Event, Node, director } from 'cc';
 import { GameManager } from './GameManager';
 import { AudioController } from './AudioController';
-import { BattleManager_test } from './BattleManager_test';
+import { BattleManager } from './BattleManager_test';
 const { ccclass, property } = _decorator;
 
 
@@ -106,6 +106,36 @@ export class AnimationController extends Component {
                 }, this);
             }
         }
+
+        this.battleManager_test?.node.on('Fight_Dodge', (ev: Event) => {
+            this.Fight_TozyDodge.play("Fight_Dodge"); //播動畫
+            setTimeout(() => { //等動畫播完後做其他事
+
+            }, this.Fight_TozyDodge.getState("Fight_Dodge").duration * 1000);
+        }, this);
+
+        this.battleManager_test?.node.on('Fight_ChiiFist', (ev: Event) => {
+            this.Fight_ChiiFist.play("Fight_ChiiFist"); //播動畫
+            setTimeout(() => { //等動畫播完後做其他事
+
+            }, this.Fight_ChiiFist.getState("Fight_ChiiFist").duration * 1000);
+        }, this);
+
+        this.battleManager_test?.node.on('Fight_Sack', (ev: Event) => {
+            this.Fight_ChiiSack.play("Fight_Sack"); //播動畫
+            setTimeout(() => { //等動畫播完後做其他事
+
+            }, this.Fight_ChiiSack.getState("Fight_Sack").duration * 1000);
+        }, this);
+
+        this.battleManager_test?.node.on('Fight_ChiiChair', (ev: Event) => {
+            this.Fight_ChiiChair.play("Fight_ChiiChair"); //播動畫
+            setTimeout(() => { //等動畫播完後做其他事
+
+            }, this.Fight_ChiiChair.getState("Fight_ChiiChair").duration * 1000);
+        }, this);
+
+
         
     }
 
@@ -116,6 +146,9 @@ export class AnimationController extends Component {
     //手動增加node
     @property(GameManager)
     gameManager: GameManager | null = null;
+
+    @property(BattleManager)
+    battleManager_test: BattleManager | null = null;
 
     @property(AudioController)
     audioController: AudioController | null = null;
@@ -134,6 +167,28 @@ export class AnimationController extends Component {
 
     @property(Animation)
     end: Animation|null=null;
+
+    @property(Animation)
+    Fight_SceneTrans_Start: Animation|null=null;
+
+    @property(Animation)
+    Fight_TozyDodge: Animation | null = null;
+
+    @property(Animation)
+    Fight_ChiiFist: Animation|null=null;
+
+    @property(Animation)
+    Fight_Dodge: Animation|null=null;
+
+    @property(Animation)
+    Fight_ChiiSack: Animation|null=null;
+
+    @property(Animation)
+    Fight_ChiiChair: Animation|null=null;
+
+    @property(Animation)
+    Fight_SceneTrans_End: Animation|null=null;
+    
 }
 
 

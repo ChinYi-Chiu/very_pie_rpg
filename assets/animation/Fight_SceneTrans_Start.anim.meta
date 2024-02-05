@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "81f71602-ba52-4ea8-b982-676b2abcad2d",
+  "uuid": "82769fc0-8cc3-4a48-af69-6fe11ad67a2b",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "Fight_Bleed"
+    "name": "Fight_SceneTrans_Start"
   }
 }

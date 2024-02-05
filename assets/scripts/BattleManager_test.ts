@@ -1,4 +1,4 @@
-import { _decorator, Component, JsonAsset, ProgressBar, Button } from "cc";
+import { _decorator, Component, JsonAsset, ProgressBar, Button, Animation } from "cc";
 import { TextShower } from "./TextShower";
 const { ccclass, property } = _decorator;
 
@@ -48,20 +48,23 @@ interface BattleData {
 
 @ccclass("BattleManager")
 export class BattleManager extends Component {
+  //角色資訊
   @property(JsonAsset)
   private fightSetting: JsonAsset | null = null;
 
+  //血量條
   @property(ProgressBar)
   public ChiiHPBar: ProgressBar | null = null;
-
   @property(ProgressBar)
   public TozyHPBar: ProgressBar | null = null;
 
+  // 玩家控制按鈕
+  @property(Button)
+  dodgeButton: Button = null!; 
+
+  //對話框
   @property(TextShower)
   public textShower: TextShower | null = null;
-
-  @property(Button)
-  dodgeButton: Button = null!; // 玩家閃避按鈕
 
   private battleData: BattleData;
   private TozyCurrentHP: number = 0;
@@ -194,6 +197,8 @@ export class BattleManager extends Component {
           this.ChiiCurrentRage = (this.ChiiCurrentRage || 0) + 1;
       }
     }*/
+    this.animationContrller(skill, status);
+
     let effectsToApply = [];
     if (status !== "normal" && skill.effects[status]) {
       effectsToApply.push(skill.effects[status].effect_player);
@@ -206,19 +211,34 @@ export class BattleManager extends Component {
 
   // 應用所有效果
     effectsToApply.forEach(effectDetail => {
-      if (effectDetail) {
-        this.applyEffect(effectDetail, target);
+        if (effectDetail) {
+          this.applyEffect(effectDetail, target);
+        }
+      });
+    }
+
+    applyEffect(effectDetail: EffectDetail, target: string) {
+      if (effectDetail.damage != null) {
+        console.log(effectDetail.damage);
+        console.log(target);
+        this.countDamage(effectDetail, target);
       }
-    });
+    this.handleCharactetStatus(effectDetail, target);
   }
 
-  applyEffect(effectDetail: EffectDetail, target: string) {
-    if (effectDetail.damage != null) {
-      console.log(effectDetail.damage);
-      console.log(target);
-      this.countDamage(effectDetail, target);
+  // 動畫控制
+  animationContrller(skill: Skill, status: string) {
+    if(skill.effects[status].animation){
+      console.log("play:" + skill.effects[status].animation);
+      setTimeout(() => {
+        this.node.emit(skill.effects[status].animation);
+      }, 1 );
+    } else {
+      console.log("play:" + skill.effects[status].animations);
+      setTimeout(() => {
+        this.node.emit(skill.effects[status].animations);
+      }, 1 );
     }
-    this.handleCharactetStatus(effectDetail, target);
   }
 
   // 應用傷害
