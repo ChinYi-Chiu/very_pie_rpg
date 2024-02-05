@@ -24,6 +24,83 @@
             "controller_id": "Indoor_SceneTrans_End",
             "ringtone_id":"indoor_scenetrans_end",
             "trans_scene":"FightScene"
+        },
+        {
+            "type": "normal",
+            "node_id":"Back_Ground",
+            "controller_id": "Back_Ground",
+            "animation_id":"background_change",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"chii_angry",
+            "controller_id": "chii_angry",
+            "animation_id":"chii_angry",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"chii_up",
+            "controller_id": "chii_up",
+            "animation_id":"chii_up",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"chii_fright",
+            "controller_id": "chii_fright",
+            "animation_id":"chii_fright",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"stare",
+            "controller_id": "stare",
+            "animation_id":"stare",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"rice",
+            "controller_id": "rice",
+            "animation_id":"food_in",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"egg",
+            "controller_id": "egg",
+            "animation_id":"food_in",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"fish",
+            "controller_id": "fish",
+            "animation_id":"food_in",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"sushi",
+            "controller_id": "sushi",
+            "animation_id":"food_in",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"shrimp",
+            "controller_id": "shrimp",
+            "animation_id":"food_in",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"X",
+            "controller_id": "X",
+            "animation_id":"X",
+            "ringtone_id":"chiiWalking"
         }
     ]
 }

@@ -134,6 +134,39 @@ export class AnimationController extends Component {
 
     @property(Animation)
     end: Animation|null=null;
+
+    @property(Animation)
+    Back_Ground: Animation|null=null;
+
+    @property(Animation)
+    chii_angry: Animation|null=null;
+
+    @property(Animation)
+    chii_up: Animation|null=null;
+
+    @property(Animation)
+    chii_fright: Animation|null=null;
+
+    @property(Animation)
+    stare: Animation|null=null;
+
+    @property(Animation)
+    rice: Animation|null=null;
+
+    @property(Animation)
+    egg: Animation|null=null;
+
+    @property(Animation)
+    fish: Animation|null=null;
+
+    @property(Animation)
+    sushi: Animation|null=null;
+
+    @property(Animation)
+    shrimp: Animation|null=null;
+
+    @property(Animation)
+    X: Animation|null=null;
 }
 
 
