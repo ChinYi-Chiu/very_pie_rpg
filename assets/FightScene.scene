@@ -57,7 +57,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 197
+      "__id__": 199
     },
     "_id": "b37d478f-4dec-48e0-9473-b2d0765452dd"
   },
@@ -4044,8 +4044,10 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "ChiiHP": 3,
-    "TozyHP": 3,
+    "fightSetting": {
+      "__uuid__": "7f81822b-c0a2-43d3-ac7a-e0fc8e89cf15",
+      "__expectedType__": "cc.JsonAsset"
+    },
     "ChiiHPBar": {
       "__id__": 68
     },
@@ -4053,11 +4055,7 @@
       "__id__": 43
     },
     "textShower": null,
-    "buttonDodge": null,
-    "jsonStory": {
-      "__uuid__": "7f81822b-c0a2-43d3-ac7a-e0fc8e89cf15",
-      "__expectedType__": "cc.JsonAsset"
-    },
+    "dodgeButton": null,
     "_id": "eetyiAATRGOqA9m49dsISq"
   },
   {
@@ -5104,6 +5102,9 @@
       },
       {
         "__id__": 195
+      },
+      {
+        "__id__": 197
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -5329,30 +5330,52 @@
     ]
   },
   {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 130
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "dodgeButton"
+    ],
+    "target": {
+      "__id__": 97
+    },
+    "targetInfo": {
+      "__id__": 198
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "89KanKYQVBLK9Vs+RXSHu/"
+    ]
+  },
+  {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 198
-    },
-    "shadows": {
-      "__id__": 199
-    },
-    "_skybox": {
       "__id__": 200
     },
-    "fog": {
+    "shadows": {
       "__id__": 201
     },
-    "octree": {
+    "_skybox": {
       "__id__": 202
     },
-    "skin": {
+    "fog": {
       "__id__": 203
     },
-    "lightProbeInfo": {
+    "octree": {
       "__id__": 204
     },
-    "postSettings": {
+    "skin": {
       "__id__": 205
+    },
+    "lightProbeInfo": {
+      "__id__": 206
+    },
+    "postSettings": {
+      "__id__": 207
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

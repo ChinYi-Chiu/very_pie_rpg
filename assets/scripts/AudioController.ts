@@ -5,7 +5,10 @@ const { ccclass, property } = _decorator;
 
 @ccclass('AudioController')
 export class AudioController extends Component {
+    private static _instance: AudioController | null = null;
+    public static getInstance(): AudioController | null { return AudioController._instance; }
     start() {
+        if (!AudioController._instance) AudioController._instance = this;
         // 綁定 button 跟 函式
         this.musicToggleButton.node.on(Node.EventType.MOUSE_UP, this.toggleBgm, this);
     }
