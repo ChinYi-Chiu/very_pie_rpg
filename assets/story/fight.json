@@ -47,7 +47,7 @@
         "target": "player",
         "type": "attack",
         "description": "Chii使用超派鐵拳,造成直接傷害。",
-        "opstatus_effects": {
+        "effects": {
           "normal": {
             "effect_player": {
               "damage": 1
@@ -56,6 +56,9 @@
             "animation": "Fight_ChiiFist"
           },
           "dodge": {
+            "effect_player": {
+              "damage": 0
+            },
             "effect_opponent": {
               "effect": "rage_up"
             },
@@ -63,6 +66,9 @@
             "animations": ["Fight_ChiiFist", "Fight_Dodge"]
           },
           "blind": {
+            "effect_player": {
+              "damage": 0
+            },
             "description": "Tozy在致盲狀態下,胡亂揮手擋住了攻擊。",
             "animation": "Fight_ChiiFist"
           }
@@ -111,6 +117,9 @@
             "animation": "Fight_ChiiChair"
           },
           "dodge": {
+            "effect_player": {
+              "damage": 0
+            },
             "description": "Tozy閃避了椅子攻擊。",
             "animation": "Fight_Dodge"
           },
