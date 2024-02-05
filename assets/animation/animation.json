@@ -1,0 +1,29 @@
+{
+    "animate_storage":[
+        {
+            "type": "normal",
+            "node_id":"chii",
+            "controller_id": "chiiComing",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"girlwalkaway",
+            "controller_id": "girlwalkaway",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "normal",
+            "node_id":"girlwalkin",
+            "controller_id": "girlwalkin",
+            "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "trans",
+            "node_id":"end",
+            "controller_id": "Indoor_SceneTrans_End",
+            "ringtone_id":"indoor_scenetrans_end",
+            "trans_scene":"FightScene"
+        }
+    ]
+}
