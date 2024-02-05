@@ -23,8 +23,7 @@
               "status": "dodge",
               "duration": 1
             },
-            "effect_opponent": {
-            },
+            "effect_opponent": {},
             "description": "能躲避大部分8+9的攻擊(持續一回合)。",
             "animation": "Fight_Dodge"
           },
@@ -33,16 +32,13 @@
               "status": "dodge",
               "duration": 1
             },
-            "effect_opponent": {
-            },
+            "effect_opponent": {},
             "description": "能躲避大部分8+9的攻擊(持續一回合)。",
             "animation": "none"
           },
           "blind": {
-            "effect_player": {
-            },
-            "effect_opponent": {
-            },
+            "effect_player": {},
+            "effect_opponent": {},
             "description": "因為處於致盲狀態，無法閃避。",
             "animation": "none"
           }
@@ -60,8 +56,7 @@
             "effect_player": {
               "damage": 1
             },
-            "effect_opponent": {
-            },
+            "effect_opponent": {},
             "description": "效果並不顯著。",
             "animation": "Fight_ChiiFist"
           },
@@ -79,8 +74,7 @@
             "effect_player": {
               "damage": 0
             },
-            "effect_opponent": {
-            },
+            "effect_opponent": {},
             "description": "Tozy在致盲狀態下,胡亂揮手擋住了攻擊。",
             "animation": "Fight_ChiiFist"
           }
@@ -97,23 +91,20 @@
               "status": "blind",
               "duration": 2
             },
-            "effect_opponent": {
-            },
-            "animation": "Fight_Sack"
+            "effect_opponent": {},
+            "animation": "Fight_ChiiSack"
           },
           "dodge": {
             "effect_player": {
               "status": "blind",
               "duration": 2
             },
-            "effect_opponent": {
-            },
+            "effect_opponent": {},
             "description": "Tozy試著閃躲,卻被抓了正著。",
-            "animation": "Fight_Sack"
+            "animation": "Fight_ChiiSack"
           },
           "blind": {
-            "effect_player": {
-            },
+            "effect_player": {},
             "effect_opponent": {
               "status": "rage_down"
             },
@@ -132,8 +123,7 @@
             "effect_player": {
               "damage": 1
             },
-            "effect_opponent": {
-            },
+            "effect_opponent": {},
             "description": "效果並不顯著。",
             "animation": "Fight_ChiiChair"
           },

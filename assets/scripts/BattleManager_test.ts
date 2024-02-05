@@ -1,4 +1,11 @@
-import { _decorator, Component, JsonAsset, ProgressBar, Button, Animation } from "cc";
+import {
+  _decorator,
+  Component,
+  JsonAsset,
+  ProgressBar,
+  Button,
+  Animation,
+} from "cc";
 import { TextShower } from "./TextShower";
 const { ccclass, property } = _decorator;
 
@@ -60,7 +67,7 @@ export class BattleManager extends Component {
 
   // 玩家控制按鈕
   @property(Button)
-  dodgeButton: Button = null!; 
+  dodgeButton: Button = null!;
 
   //對話框
   @property(TextShower)
@@ -130,7 +137,7 @@ export class BattleManager extends Component {
       this.applySkillEffect(dodgeSkill);
     }
   }
-  
+
   //先預設回合動作，以後會改
   opponentTakesTurn() {
     this.isPlayerTurn = true;
@@ -156,7 +163,7 @@ export class BattleManager extends Component {
 
   applySkillEffect(skill: Skill) {
     this.displaySkillDescription(skill);
-  
+
     const target = skill.target === "player" ? "Tozy" : "Chii";
     let targetStatusArray: Record<string, number>;
     if (skill.target === "player") {
@@ -165,9 +172,13 @@ export class BattleManager extends Component {
       targetStatusArray = this.ChiiCurrentStatus;
     }
     const status = this.checkCharacterStatus(targetStatusArray);
-    console.log(target +" "+ status);
+    console.log(target + " " + status);
 
-    this.handleEffectDetail(skill, status, skill.target === "player" ? "Tozy" : "Chii");
+    this.handleEffectDetail(
+      skill,
+      status,
+      skill.target === "player" ? "Tozy" : "Chii"
+    );
 
     this.updateUI();
 
@@ -177,11 +188,11 @@ export class BattleManager extends Component {
   //顯示技能描述
   displaySkillDescription(skill: Skill) {
     if (this.textShower && skill.description) {
-        this.textShower.showText = skill.description;
-        this.textShower.OnShowTextOneByOne();
+      this.textShower.showText = skill.description;
+      this.textShower.OnShowTextOneByOne();
     }
   }
-  
+
   //檢查角色狀態
   checkCharacterStatus(TozyCurrentStatus: Record<string, any>): string {
     if (TozyCurrentStatus["dodge"]) return "dodge";
@@ -197,7 +208,7 @@ export class BattleManager extends Component {
           this.ChiiCurrentRage = (this.ChiiCurrentRage || 0) + 1;
       }
     }*/
-    this.animationContrller(skill, status);
+    this.animationController(skill, status);
 
     let effectsToApply = [];
     if (status !== "normal" && skill.effects[status]) {
@@ -209,58 +220,71 @@ export class BattleManager extends Component {
     }
     console.log(effectsToApply);
 
-  // 應用所有效果
-    effectsToApply.forEach(effectDetail => {
-        if (effectDetail) {
-          this.applyEffect(effectDetail, target);
-        }
-      });
-    }
-
-    applyEffect(effectDetail: EffectDetail, target: string) {
-      if (effectDetail.damage != null) {
-        console.log(effectDetail.damage);
-        console.log(target);
-        this.countDamage(effectDetail, target);
+    // 應用所有效果
+    effectsToApply.forEach((effectDetail) => {
+      if (effectDetail) {
+        this.applyEffect(effectDetail, target);
       }
+    });
+  }
+
+  applyEffect(effectDetail: EffectDetail, target: string) {
+    if (effectDetail.damage != null) {
+      console.log(effectDetail.damage);
+      console.log(target);
+      this.countDamage(effectDetail, target);
+    }
     this.handleCharactetStatus(effectDetail, target);
   }
 
   // 動畫控制
-  animationContrller(skill: Skill, status: string) {
-    if(skill.effects[status].animation){
-      console.log("play:" + skill.effects[status].animation);
-      setTimeout(() => {
-        this.node.emit(skill.effects[status].animation);
-      }, 1 );
-    } else {
-      console.log("play:" + skill.effects[status].animations);
-      setTimeout(() => {
-        this.node.emit(skill.effects[status].animations);
-      }, 1 );
+  animationController(skill: Skill, status: string) {
+    const effect = skill.effects[status] || skill.effects.normal;
+    // 检查是否有单个动画
+    if (effect.animation) {
+      console.log("Emitting animation event:", effect.animation);
+      this.node.emit(effect.animation);
+    }
+
+    // 检查是否有多个动画
+    if (effect.animations) {
+      effect.animations.forEach((animationName) => {
+        console.log("Emitting animation event:", animationName);
+        this.node.emit(animationName);
+      });
     }
   }
 
   // 應用傷害
   countDamage(effectDetail: EffectDetail, target: string) {
     if (target === "Tozy") {
-        this.TozyCurrentHP = Math.max(0, this.TozyCurrentHP - effectDetail.damage);
-        console.log(`Tozy receives ${effectDetail.damage} damage.`);
+      this.TozyCurrentHP = Math.max(
+        0,
+        this.TozyCurrentHP - effectDetail.damage
+      );
+      console.log(`Tozy receives ${effectDetail.damage} damage.`);
     } else if (target === "Chii") {
-        this.ChiiCurrentHP = Math.max(0, this.ChiiCurrentHP - effectDetail.damage);
-        console.log(`Chii receives ${effectDetail.damage} damage.`);
+      this.ChiiCurrentHP = Math.max(
+        0,
+        this.ChiiCurrentHP - effectDetail.damage
+      );
+      console.log(`Chii receives ${effectDetail.damage} damage.`);
     }
   }
 
   // 處理狀態
   handleCharactetStatus(effectDetail: EffectDetail, target: string) {
-    let currentStatus = target === "Tozy" ? this.TozyCurrentStatus : this.ChiiCurrentStatus;
+    let currentStatus =
+      target === "Tozy" ? this.TozyCurrentStatus : this.ChiiCurrentStatus;
 
     if (effectDetail.status && effectDetail.duration) {
       if (currentStatus[effectDetail.status]) {
-          currentStatus[effectDetail.status] = Math.max(currentStatus[effectDetail.status], effectDetail.duration);
+        currentStatus[effectDetail.status] = Math.max(
+          currentStatus[effectDetail.status],
+          effectDetail.duration
+        );
       } else {
-          currentStatus[effectDetail.status] = effectDetail.duration;
+        currentStatus[effectDetail.status] = effectDetail.duration;
       }
     }
   }
@@ -268,21 +292,21 @@ export class BattleManager extends Component {
   //更新狀態持續時間
   updateStatusDuration() {
     // 更新Tozy的狀態持續時間
-    Object.keys(this.TozyCurrentStatus).forEach(status => {
-        this.TozyCurrentStatus[status]--;
-        if (this.TozyCurrentStatus[status] <= 0) {
-            delete this.TozyCurrentStatus[status];
-        }
+    Object.keys(this.TozyCurrentStatus).forEach((status) => {
+      this.TozyCurrentStatus[status]--;
+      if (this.TozyCurrentStatus[status] <= 0) {
+        delete this.TozyCurrentStatus[status];
+      }
     });
 
     // 更新Chii的狀態持續時間
-    Object.keys(this.ChiiCurrentStatus).forEach(status => {
-        this.ChiiCurrentStatus[status]--;
-        if (this.ChiiCurrentStatus[status] <= 0) {
-            delete this.ChiiCurrentStatus[status];
-        }
+    Object.keys(this.ChiiCurrentStatus).forEach((status) => {
+      this.ChiiCurrentStatus[status]--;
+      if (this.ChiiCurrentStatus[status] <= 0) {
+        delete this.ChiiCurrentStatus[status];
+      }
     });
-}
+  }
 
   // 檢查是否遊戲結束
   checkEndGameOrNextRound() {
@@ -294,7 +318,7 @@ export class BattleManager extends Component {
       // 遊戲未結束，進行下一回合
       this.roundStart();
     }
-  }  
+  }
 
   playerWins() {
     // 玩家勝利的處理，例如顯示勝利信息
