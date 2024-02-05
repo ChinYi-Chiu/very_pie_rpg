@@ -1,49 +1,127 @@
 {
-    "playerSkill": [
+  "characters": {
+    "Tozy": {
+      "HP": 3,
+      "statusEffects": {}
+    },
+    "Chii": {
+      "HP": 3,
+      "Rage": 0,
+      "statusEffects": {}
+    }
+  },
+  "skills": {
+    "player": [
       {
         "id": "Dodge",
+        "target": "player",
         "type": "buff",
-        "speak": "Tozy使用了鬼之閃避,能閃過大部分8+9的拳頭。(持續一回合)",
-        "self_effect": "dodge",
-        "animation": "none"
+        "description": "Tozy使用了鬼之閃避。",
+        "effects": {
+          "normal": {
+            "effect_player": {
+              "status": "dodge",
+              "duration": 1
+            },
+            "description": "能躲避大部分8+9的攻擊(持續一回合)。",
+            "animation": "none"
+          },
+          "dodge": {
+            "effect_player": {
+              "status": "dodge",
+              "duration": 1
+            },
+            "description": "能躲避大部分8+9的攻擊(持續一回合)。",
+            "animation": "none"
+          },
+          "blind": {
+            "description": "因為處於致盲狀態，無法閃避。",
+            "animation": "none"
+          }
+        }
       }
     ],
-    "chiiSkill": [
+    "opponent": [
       {
         "id": "Pie",
+        "target": "player",
         "type": "attack",
-        "speak": "起哥使用了祖傳的超派鐵拳。",
-        "animation": "Fight_ChiiFist",
-        "damage": 1,
-        "dodge": {
-            "animation1": "Fight_ChiiFist",
-            "animation2": "Fight_Dodge",
-            "speak": "起哥使用了祖傳的超派鐵拳,但是Tozy巧妙地躲過了攻擊,因此起哥怒氣值上升。",
-            "opposite_effect": "rage_up",
-            "damage": 0
+        "description": "Chii使用超派鐵拳,造成直接傷害。",
+        "opstatus_effects": {
+          "normal": {
+            "effect_player": {
+              "damage": 1
+            },
+            "description": "效果並不顯著。",
+            "animation": "Fight_ChiiFist"
+          },
+          "dodge": {
+            "effect_opponent": {
+              "effect": "rage_up"
+            },
+            "description": "Tozy巧妙地躲過了攻擊。",
+            "animations": ["Fight_ChiiFist", "Fight_Dodge"]
+          },
+          "blind": {
+            "description": "Tozy在致盲狀態下,胡亂揮手擋住了攻擊。",
+            "animation": "Fight_ChiiFist"
           }
+        }
       },
       {
         "id": "Sack",
-        "type": "attack",
-        "speak": "起哥使用了蓋布袋。",
-        "animation": "Fight_Sack",
-        "self_effect": "blind",
-        "damage": 0,
-        "dodge": {
-            "speak": "起哥使用了蓋布袋,Tozy想試著鬼之閃避,卻被抓了正著。"
+        "target": "player",
+        "type": "debuff",
+        "description": "Chii使用蓋布袋。",
+        "effects": {
+          "normal": {
+            "effect_player": {
+              "status": "blind",
+              "duration": 2
+            },
+            "animation": "Fight_Sack"
+          },
+          "dodge": {
+            "effect_player": {
+              "status": "blind",
+              "duration": 2
+            },
+            "description": "Tozy試著閃躲,卻被抓了正著。",
+            "animation": "Fight_Sack"
+          },
+          "blind": {
+            "effect_opponent": {
+              "status": "rage_down"
+            },
+            "description": "Tozy已經被蓋布袋了。"
           }
+        }
       },
       {
         "id": "Chair",
+        "target": "player",
         "type": "attack",
-        "speak": "起哥抄起椅子砸了過來",
-        "animation": "Fight_ChiiChair",
-        "damage": 1,
-        "blind": {
-            "speak": "起哥抄起椅子砸了過來,直接砸暈了Tozy。",
-            "damage": 3
+        "description": "Chii抄起椅子砸向Tozy。",
+        "effects": {
+          "normal": {
+            "effect_player": {
+              "damage": 1
+            },
+            "description": "效果並不顯著。",
+            "animation": "Fight_ChiiChair"
+          },
+          "dodge": {
+            "description": "Tozy閃避了椅子攻擊。",
+            "animation": "Fight_Dodge"
+          },
+          "blind": {
+            "effect_player": {
+              "damage": 3
+            },
+            "description": "Tozy因致盲而無法閃避椅子攻擊,受到重傷。"
           }
+        }
       }
     ]
   }
+}
