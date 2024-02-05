@@ -23,7 +23,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 161
+      "__id__": 163
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -54,7 +54,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 166
+      "__id__": 168
     },
     "_id": "a52478be-be87-4b8a-b282-f66fdf848d68"
   },
@@ -107,13 +107,13 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 158
-      },
-      {
-        "__id__": 159
-      },
-      {
         "__id__": 160
+      },
+      {
+        "__id__": 161
+      },
+      {
+        "__id__": 162
       }
     ],
     "_prefab": null,
@@ -4610,6 +4610,10 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "jsonAnimate": {
+      "__uuid__": "191de977-9103-4c2a-bc73-484dbbe07474",
+      "__expectedType__": "cc.JsonAsset"
+    },
     "gameManager": {
       "__id__": 61
     },
@@ -4651,6 +4655,9 @@
     },
     "bgm1": {
       "__id__": 156
+    },
+    "indoor_scenetrans_end": {
+      "__id__": 158
     },
     "musicToggleButton": {
       "__id__": 24
@@ -4725,12 +4732,15 @@
       },
       {
         "__id__": 155
+      },
+      {
+        "__id__": 157
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 157
+        "__id__": 159
       }
     ],
     "_prefab": null,
@@ -4823,7 +4833,7 @@
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": false,
-    "_playOnAwake": true,
+    "_playOnAwake": false,
     "_volume": 1,
     "_id": "ecshMI00lJeJauSraBQnAi"
   },
@@ -4887,7 +4897,7 @@
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": false,
-    "_playOnAwake": true,
+    "_playOnAwake": false,
     "_volume": 1,
     "_id": "ffmGU6o2JHkbQbJnJY/lO3"
   },
@@ -4950,10 +4960,74 @@
       "__uuid__": "40f74819-b790-44b6-a02f-fe7b87946ebc",
       "__expectedType__": "cc.AudioClip"
     },
-    "_loop": false,
+    "_loop": true,
     "_playOnAwake": true,
     "_volume": 1,
     "_id": "fadNO8AwlNC52ARQn/OXml"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "轉場",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": {
+      "__id__": 150
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 158
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "102Xybns9ORrSs0Nz8tPZN"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 157
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": {
+      "__uuid__": "3f98804a-bc02-429f-8b53-b928ab740fc3",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "_loop": false,
+    "_playOnAwake": false,
+    "_volume": 1,
+    "_id": "6dqjyxeE1EFbW99mi9rp+g"
   },
   {
     "__type__": "cc.UITransform",
@@ -5053,10 +5127,10 @@
     "instance": null,
     "targetOverrides": [
       {
-        "__id__": 162
+        "__id__": 164
       },
       {
-        "__id__": 164
+        "__id__": 166
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -5081,7 +5155,7 @@
       "__id__": 46
     },
     "targetInfo": {
-      "__id__": 163
+      "__id__": 165
     }
   },
   {
@@ -5103,7 +5177,7 @@
       "__id__": 46
     },
     "targetInfo": {
-      "__id__": 165
+      "__id__": 167
     }
   },
   {
@@ -5115,28 +5189,28 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 167
-    },
-    "shadows": {
-      "__id__": 168
-    },
-    "_skybox": {
       "__id__": 169
     },
-    "fog": {
+    "shadows": {
       "__id__": 170
     },
-    "octree": {
+    "_skybox": {
       "__id__": 171
     },
-    "skin": {
+    "fog": {
       "__id__": 172
     },
-    "lightProbeInfo": {
+    "octree": {
       "__id__": 173
     },
-    "postSettings": {
+    "skin": {
       "__id__": 174
+    },
+    "lightProbeInfo": {
+      "__id__": 175
+    },
+    "postSettings": {
+      "__id__": 176
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
