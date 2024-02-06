@@ -7,6 +7,7 @@ import {
   Event,
   Node,
   director,
+  find 
 } from "cc";
 import { GameManager } from "./GameManager";
 import { AudioController } from "./AudioController";
@@ -54,8 +55,11 @@ export class AnimationController extends Component {
   @property(JsonAsset)
   private jsonAnimate: JsonAsset | null = null;
   private animate: IAnimation | null = null;
+  
 
   start() {
+    let nodeToDisable = find('Canvas/Audio/japaness_restaurant_a');
+
     if (this.jsonAnimate) this.animate = this.jsonAnimate.json as IAnimation;
 
     const animation_count = this.animate.animate_storage.length;
@@ -116,12 +120,12 @@ export class AnimationController extends Component {
           l_controller_id,
           (ev: Event) => {
             this[l_node_id]?.play(l_animation_id); //播動畫
-            this.audioController?.play(l_ringtone_id); //播音樂
+            //this.audioController?.play(l_ringtone_id); //播音樂*/
             setTimeout(() => {
-              this.audioController?.stop(l_ringtone_id); //音樂停
+              //this.audioController?.stop(l_ringtone_id); //音樂停
               //this.gameManager?.updateUI(); // 播完動畫，進入下一個場景
-              director.loadScene(l_trans_scene); //轉換到戰鬥場景
               console.log("轉換場景：", l_trans_scene);
+              director.loadScene(l_trans_scene); //轉換到戰鬥場景
             }, this[l_node_id]?.getState(l_animation_id)?.duration * 1000 || 0);
           },
           this
@@ -180,6 +184,29 @@ export class AnimationController extends Component {
         setTimeout(() => {
           //等動畫播完後做其他事
         }, this.Fight_ChiiChair.getState("Fight_ChiiChair").duration * 1000);
+      },
+      this
+    );
+
+    this.battleManager_test?.node.on(
+        "Fight_SceneTrans_Start",
+        (ev: Event) => {
+            console.log("play Fight_SceneTrans_Start");
+            this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start"); //播動畫
+            setTimeout(() => {
+                //等動畫播完後做其他事
+            }, this.Fight_SceneTrans_Start.getState("Fight_SceneTrans_Start").duration * 500);
+        },
+        this
+    );
+
+    this.battleManager_test?.node.on(
+      "Fight_SceneTrans_EndingA",
+      (ev: Event) => {
+        this.Fight_SceneTrans_End.play("Fight_SceneTrans_EndingA"); //播動畫
+        setTimeout(() => {
+          //等動畫播完後做其他事
+        }, this.Fight_SceneTrans_End.getState("Fight_SceneTrans_EndingA").duration * 1000);
       },
       this
     );

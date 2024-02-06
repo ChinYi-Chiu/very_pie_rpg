@@ -226,7 +226,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 413.57702349869453,
+    "_orthoHeight": 360,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -4676,6 +4676,7 @@
     "gameManager": {
       "__id__": 62
     },
+    "battleManager_test": null,
     "audioController": {
       "__id__": 149
     },
@@ -4694,6 +4695,13 @@
     "end": {
       "__id__": 138
     },
+    "Fight_SceneTrans_Start": null,
+    "Fight_TozyDodge": null,
+    "Fight_ChiiFist": null,
+    "Fight_Dodge": null,
+    "Fight_ChiiSack": null,
+    "Fight_ChiiChair": null,
+    "Fight_SceneTrans_End": null,
     "Back_Ground": {
       "__id__": 18
     },
