@@ -1,4 +1,5 @@
 import { _decorator, Animation, AnimationClip, Component, director, Node, Quat, Tween, tween } from 'cc';
+import { AudioController } from './AudioController';
 const { ccclass, property } = _decorator;
 
 /**
@@ -22,6 +23,7 @@ export class Utility extends Component {
         director.preloadScene(sceneName);
 
         this.loading.getComponent(Animation).play("Main_Menu_SceneTrans");
+        this.AC.stop("bgm1");
 
         setTimeout(() => {
             Tween.stopAllByTarget(this.loading);
@@ -33,6 +35,8 @@ export class Utility extends Component {
     transBackGround: Node | null = null;
     @property(Node)
     loading: Node | null = null;
+    @property(AudioController)
+    AC: AudioController | null = null;
 }
 
 
