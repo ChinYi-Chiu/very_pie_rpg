@@ -7,7 +7,7 @@ import {
   Event,
   Node,
   director,
-  find 
+  find,
 } from "cc";
 import { GameManager } from "./GameManager";
 import { AudioController } from "./AudioController";
@@ -34,7 +34,7 @@ interface INormal {
 interface ISkill {
   //事件(動畫)
   type: "skill";
-  node_id: string; 
+  node_id: string;
   controller_id: string;
   animation_id?: string;
   ringtone_id?: string;
@@ -65,10 +65,9 @@ export class AnimationController extends Component {
   @property(JsonAsset)
   private jsonAnimate: JsonAsset | null = null;
   private animate: IAnimation | null = null;
-  
 
   start() {
-    let nodeToDisable = find('Canvas/Audio/japaness_restaurant_a');
+    let nodeToDisable = find("Canvas/Audio/japaness_restaurant_a");
 
     if (this.jsonAnimate) this.animate = this.jsonAnimate.json as IAnimation;
 
@@ -136,11 +135,11 @@ export class AnimationController extends Component {
               //this.gameManager?.updateUI(); // 播完動畫，進入下一個場景
               console.log("轉換場景：", l_trans_scene);
               director.loadScene(l_trans_scene); //轉換到戰鬥場景
-            }, this[l_node_id]?.getState(l_animation_id)?.duration * 1000||0);
+            }, this[l_node_id]?.getState(l_animation_id)?.duration * 1000 || 0);
           },
           this
         );
-      } else if (l_type==="skill"){
+      } else if (l_type === "skill") {
         this.battleManager_test?.node.on(
           l_controller_id,
           (ev: Event) => {
@@ -149,7 +148,7 @@ export class AnimationController extends Component {
             setTimeout(() => {
               //等動畫播完後做其他事
               this.audioController?.stop(l_ringtone_id); //音樂停
-            },this[l_node_id]?.getState(l_animation_id).duration * 1000);
+            }, this[l_node_id]?.getState(l_animation_id).duration * 1000);
           },
           this
         );
@@ -157,15 +156,27 @@ export class AnimationController extends Component {
     }
 
     this.battleManager_test?.node.on(
-        "Fight_SceneTrans_Start",
-        (ev: Event) => {
-            console.log("play Fight_SceneTrans_Start");
-            this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start"); //播動畫
-            setTimeout(() => {
-              //等動畫播完後做其他事
-            }, this.Fight_SceneTrans_Start.getState("Fight_SceneTrans_Start").duration * 500);
-        },
-        this
+      "Fight_SceneTrans_Start",
+      (ev: Event) => {
+        console.log("play Fight_SceneTrans_Start");
+        this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start"); //播動畫
+        setTimeout(() => {
+          //等動畫播完後做其他事
+        }, this.Fight_SceneTrans_Start.getState("Fight_SceneTrans_Start").duration * 500);
+      },
+      this
+    );
+
+    this.battleManager_test?.node.on(
+      "Fight_TozyHurt",
+      (ev: Event) => {
+        console.log("play Fight_TozyHurt");
+        this.Fight_TozyHurt.play("Fight_TozyHurt"); //播動畫
+        setTimeout(() => {
+          //等動畫播完後做其他事
+        }, this.Fight_TozyHurt.getState("Fight_TozyHurt").duration * 500);
+      },
+      this
     );
 
     this.battleManager_test?.node.on(
@@ -209,6 +220,9 @@ export class AnimationController extends Component {
 
   @property(Animation)
   Fight_SceneTrans_Start: Animation | null = null;
+
+  @property(Animation)
+  Fight_TozyHurt: Animation | null = null;
 
   @property(Animation)
   Fight_TozyDodge: Animation | null = null;

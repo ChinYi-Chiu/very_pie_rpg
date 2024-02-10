@@ -25,7 +25,7 @@
             },
             "effect_opponent": {},
             "description": "能躲避大部分8+9的攻擊(持續一回合)。",
-            "animation": "Fight_Dodge"
+            "animation": "Fight_TozyDodge"
           },
           "dodge": {
             "effect_player": {
@@ -34,7 +34,7 @@
             },
             "effect_opponent": {},
             "description": "能躲避大部分8+9的攻擊(持續一回合)。",
-            "animation": "none"
+            "animation": "Fight_TozyDodge"
           },
           "blind": {
             "effect_player": {},

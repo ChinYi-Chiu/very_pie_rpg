@@ -9,9 +9,8 @@ import {
   Animation,
 } from "cc";
 import { TextShower } from "./TextShower";
-//import { TextShowerFu } from "./TextShowerFu";
-import { TextShowerRandy } from './TextShowerRandy';
 import { AudioController } from "./AudioController";
+import { TextShowerRandy } from "./TextShowerRandy";
 const { ccclass, property } = _decorator;
 
 interface EffectDetail {
@@ -87,7 +86,7 @@ export class BattleManager extends Component {
   Fight_SceneTrans_Start: Animation | null = null;
 
   @property(AudioController)
-  AudioController: AudioController|null=null;
+  AudioController: AudioController | null = null;
   private battleData: BattleData;
   private TozyCurrentHP: number = 0;
   private TozyCurrentStatus: Record<string, number> = {};
@@ -95,7 +94,6 @@ export class BattleManager extends Component {
   private ChiiCurrentStatus: Record<string, number> = {};
   private currentTurn: number = 0;
   private isPlayerTurn: boolean = true; // 初始設定為玩家回合
-
 
   start() {
     // 假設你已經將fight.json加載到fightSetting中
@@ -106,9 +104,13 @@ export class BattleManager extends Component {
     this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start");
 
     // 監聽動畫完成事件
-    this.Fight_SceneTrans_Start.on(Animation.EventType.FINISHED, () => {
-      this.roundStart();
-    }, this);
+    this.Fight_SceneTrans_Start.on(
+      Animation.EventType.FINISHED,
+      () => {
+        this.roundStart();
+      },
+      this
+    );
   }
 
   initializeBattle() {
@@ -199,14 +201,16 @@ export class BattleManager extends Component {
         }
         const status = this.checkCharacterStatus(targetStatusArray);
         console.log(target + " " + status);
-        
-        this.handleEffectDetail(skill, status, target).then(() => {
-          //等待handleEffectDetail返回後再執行
-          return this.updateUI();
-        }).then(() => {
-          // 等待updateUI動畫完成後再執行checkEndGameOrNextRound
-          this.checkEndGameOrNextRound();
-        });
+
+        this.handleEffectDetail(skill, status, target)
+          .then(() => {
+            //等待handleEffectDetail返回後再執行
+            return this.updateUI();
+          })
+          .then(() => {
+            // 等待updateUI動畫完成後再執行checkEndGameOrNextRound
+            this.checkEndGameOrNextRound();
+          });
       }, 500);
     });
   }
@@ -225,10 +229,14 @@ export class BattleManager extends Component {
   }
 
   //處理技能效果
-  async handleEffectDetail(skill: Skill, status: string, target: string): Promise<void> {
+  async handleEffectDetail(
+    skill: Skill,
+    status: string,
+    target: string
+  ): Promise<void> {
     let effectsToApply = [];
     let effectDescription = ""; // 儲存效果描述的變數
-  
+
     /*
     ...
     在這裡寫憤怒系統
@@ -236,7 +244,7 @@ export class BattleManager extends Component {
     */
 
     this.animationController(skill, status);
-  
+
     // 根據角色狀態選擇效果和描述
     if (status !== "normal" && skill.effects[status]) {
       effectsToApply.push(skill.effects[status].effect_player);
@@ -247,25 +255,25 @@ export class BattleManager extends Component {
       effectsToApply.push(skill.effects.normal.effect_opponent);
       effectDescription = skill.effects.normal.description; // 獲取普通狀態的描述
     }
-  
+
     console.log(effectsToApply);
     console.log(effectDescription);
-  
-    // 顯示效果描述
-    if (this.dialogContent && effectDescription) {
-      this.displaySkillDescription("", effectDescription); // 如果displaySkillDescription不接受null，則传递空字符串
-      await new Promise<void>(resolve => 
-        this.textShowerRandy.node.once("textingEnd", () => {
-          setTimeout(resolve, 500); // 延遲500毫秒後解決Promise
-        })
-      );
-    }
-  
+
     // 在此處理所有效果
     for (const effectDetail of effectsToApply) {
       if (effectDetail) {
         this.applyEffect(effectDetail, target);
       }
+    }
+
+    // 顯示效果描述
+    if (this.dialogContent && effectDescription) {
+      this.displaySkillDescription("", effectDescription); // 如果displaySkillDescription不接受null，則传递空字符串
+      await new Promise<void>((resolve) =>
+        this.textShowerRandy.node.once("textingEnd", () => {
+          setTimeout(resolve, 500); // 延遲500毫秒後解決Promise
+        })
+      );
     }
   }
 
@@ -284,10 +292,10 @@ export class BattleManager extends Component {
         this.node.emit(animationName);
       });
     }
-  }  
+  }
 
   applyEffect(effectDetail: EffectDetail, target: string) {
-    if (effectDetail.damage != null) {
+    if (effectDetail.damage != null && effectDetail.damage != 0) {
       console.log(effectDetail.damage);
       console.log(target);
       this.countDamage(effectDetail, target);
@@ -302,6 +310,7 @@ export class BattleManager extends Component {
         0,
         this.TozyCurrentHP - effectDetail.damage
       );
+      this.node.emit("Fight_TozyHurt");
       console.log(`Tozy receives ${effectDetail.damage} damage.`);
     } else if (target === "Chii") {
       this.ChiiCurrentHP = Math.max(
@@ -350,9 +359,10 @@ export class BattleManager extends Component {
 
   // 檢查是否遊戲結束
   checkEndGameOrNextRound() {
-    if (this.TozyCurrentHP <= 0 || this.ChiiCurrentHP <= 0) {
+    if (this.TozyCurrentHP <= 0) {
       this.node.emit("Fight_SceneTrans_EndingA");
       // 可以在這裡調用遊戲結束的UI更新函式
+    } else if (this.ChiiCurrentHP <= 0) {
     } else {
       // 遊戲未結束，進行下一回合
       this.roundStart();
@@ -372,19 +382,27 @@ export class BattleManager extends Component {
   async updateUI(): Promise<void> {
     let promises = [];
 
-    promises.push(new Promise<void>((resolve) => {
-      new Tween(this.ChiiHPBar)
-        .to(1, { progress: this.ChiiCurrentHP / this.battleData.characters.Chii.HP })
-        .call(resolve) // 當Tween完成時，調用resolve
-        .start();
-    }));
+    promises.push(
+      new Promise<void>((resolve) => {
+        new Tween(this.ChiiHPBar)
+          .to(1, {
+            progress: this.ChiiCurrentHP / this.battleData.characters.Chii.HP,
+          })
+          .call(resolve) // 當Tween完成時，調用resolve
+          .start();
+      })
+    );
 
-    promises.push(new Promise<void>((resolve) => {
-      new Tween(this.TozyHPBar)
-        .to(1, { progress: this.TozyCurrentHP / this.battleData.characters.Tozy.HP })
-        .call(resolve) // 當Tween完成時，調用resolve
-        .start();
-    }));
+    promises.push(
+      new Promise<void>((resolve) => {
+        new Tween(this.TozyHPBar)
+          .to(1, {
+            progress: this.TozyCurrentHP / this.battleData.characters.Tozy.HP,
+          })
+          .call(resolve) // 當Tween完成時，調用resolve
+          .start();
+      })
+    );
 
     await Promise.all(promises);
   }
