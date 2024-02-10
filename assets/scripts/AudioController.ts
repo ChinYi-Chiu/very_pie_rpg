@@ -1,5 +1,4 @@
 import { _decorator, AudioClip, AudioSource, Button, Component, Label, Node } from 'cc';
-import { GameManager } from './GameManager';
 import { AnimationController } from './AnimationController';
 const { ccclass, property } = _decorator;
 
@@ -62,9 +61,23 @@ export class AudioController extends Component {
     @property(Button)
     musicToggleButton: Button | null = null;
 
-    @property(GameManager)
-    gameManager: GameManager | null = null;
+    @property(AudioSource)
+    indoor_scenetrans_end: AudioSource | null = null;
 
+    @property(AudioSource)//椅子
+    Fight_ChiiChair: AudioSource | null = null;
+
+    @property(AudioSource)//蓋布袋
+    Fight_ChiiSack: AudioSource | null = null;
+
+    @property(AudioSource)//起派鐵拳
+    Fight_ChiiFist: AudioSource | null = null;
+
+    @property(AudioSource)//鬼之閃避
+    Fight_Dodge: AudioSource | null = null;
+
+    @property(AudioSource)//點擊音效
+    Click: AudioSource | null = null;
 }
 
 

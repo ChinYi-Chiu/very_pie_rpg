@@ -101,6 +101,35 @@
             "controller_id": "X",
             "animation_id":"X",
             "ringtone_id":"chiiWalking"
+        },
+        {
+            "type": "skill",
+            "node_id":"Fight_TozyDodge",
+            "controller_id": "Fight_Dodge",
+            "animation_id":"Fight_Dodge",
+            "ringtone_id":"Fight_Dodge"
+        },
+        {
+            "type": "skill",
+            "node_id":"Fight_Dodge",
+            "controller_id": "Fight_Dodge",
+            "animation_id":"Fight_Dodge",
+            "ringtone_id":"Fight_Dodge"
+        },
+        {
+            "type": "skill",
+            "node_id":"Fight_ChiiFist",
+            "controller_id": "Fight_ChiiFist"
+        },
+        {
+            "type": "skill",
+            "node_id":"Fight_ChiiSack",
+            "controller_id": "Fight_ChiiSack"
+        },
+        {
+            "type": "skill",
+            "node_id":"Fight_ChiiChair",
+            "controller_id": "Fight_ChiiChair"
         }
     ]
 }

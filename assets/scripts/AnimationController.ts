@@ -20,7 +20,7 @@ const { ccclass, property } = _decorator;
  * 後面有 ? 的為選填項，除了選填項其他請務必一定要填入值
  */
 interface IAnimation {
-  animate_storage: (INormal | IFood | ITrans)[];
+  animate_storage: (INormal | ISkill | IFood | ITrans)[];
 }
 interface INormal {
   //事件(動畫)
@@ -30,6 +30,16 @@ interface INormal {
   animation_id?: string;
   ringtone_id?: string;
 }
+
+interface ISkill {
+  //事件(動畫)
+  type: "skill";
+  node_id: string; 
+  controller_id: string;
+  animation_id?: string;
+  ringtone_id?: string;
+}
+
 interface IFood {
   //事件(動畫)
   type: "food";
@@ -120,13 +130,26 @@ export class AnimationController extends Component {
           l_controller_id,
           (ev: Event) => {
             this[l_node_id]?.play(l_animation_id); //播動畫
-            //this.audioController?.play(l_ringtone_id); //播音樂*/
+            this.audioController?.play(l_ringtone_id); //播音樂*/
             setTimeout(() => {
-              //this.audioController?.stop(l_ringtone_id); //音樂停
+              this.audioController?.stop(l_ringtone_id); //音樂停
               //this.gameManager?.updateUI(); // 播完動畫，進入下一個場景
               console.log("轉換場景：", l_trans_scene);
               director.loadScene(l_trans_scene); //轉換到戰鬥場景
-            }, this[l_node_id]?.getState(l_animation_id)?.duration * 1000 || 0);
+            }, this[l_node_id]?.getState(l_animation_id)?.duration * 1000||0);
+          },
+          this
+        );
+      } else if (l_type==="skill"){
+        this.battleManager_test?.node.on(
+          l_controller_id,
+          (ev: Event) => {
+            this[l_node_id]?.play(l_animation_id); //播動畫
+            this.audioController?.play(l_ringtone_id); //播音樂*/
+            setTimeout(() => {
+              //等動畫播完後做其他事
+              this.audioController?.stop(l_ringtone_id); //音樂停
+            },this[l_node_id]?.getState(l_animation_id).duration * 1000);
           },
           this
         );
@@ -134,67 +157,12 @@ export class AnimationController extends Component {
     }
 
     this.battleManager_test?.node.on(
-      "Fight_Dodge",
-      (ev: Event) => {
-        this.Fight_TozyDodge.play("Fight_Dodge"); //播動畫
-        setTimeout(() => {
-          //等動畫播完後做其他事
-        }, this.Fight_TozyDodge.getState("Fight_Dodge").duration * 1000);
-      },
-      this
-    );
-
-    this.battleManager_test?.node.on(
-      "Fight_Dodge",
-      (ev: Event) => {
-        this.Fight_Dodge.play("Fight_Dodge"); //播動畫
-        setTimeout(() => {
-          //等動畫播完後做其他事
-        }, this.Fight_Dodge.getState("Fight_Dodge").duration * 1000);
-      },
-      this
-    );
-
-    this.battleManager_test?.node.on(
-      "Fight_ChiiFist",
-      (ev: Event) => {
-        this.Fight_ChiiFist.play("Fight_ChiiFist"); //播動畫
-        setTimeout(() => {
-          //等動畫播完後做其他事
-        }, this.Fight_ChiiFist.getState("Fight_ChiiFist").duration * 1000);
-      },
-      this
-    );
-
-    this.battleManager_test?.node.on(
-      "Fight_ChiiSack",
-      (ev: Event) => {
-        this.Fight_ChiiSack.play("Fight_ChiiSack"); //播動畫
-        setTimeout(() => {
-          //等動畫播完後做其他事
-        }, this.Fight_ChiiSack.getState("Fight_ChiiSack").duration * 1000);
-      },
-      this
-    );
-
-    this.battleManager_test?.node.on(
-      "Fight_ChiiChair",
-      (ev: Event) => {
-        this.Fight_ChiiChair.play("Fight_ChiiChair"); //播動畫
-        setTimeout(() => {
-          //等動畫播完後做其他事
-        }, this.Fight_ChiiChair.getState("Fight_ChiiChair").duration * 1000);
-      },
-      this
-    );
-
-    this.battleManager_test?.node.on(
         "Fight_SceneTrans_Start",
         (ev: Event) => {
             console.log("play Fight_SceneTrans_Start");
             this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start"); //播動畫
             setTimeout(() => {
-                //等動畫播完後做其他事
+              //等動畫播完後做其他事
             }, this.Fight_SceneTrans_Start.getState("Fight_SceneTrans_Start").duration * 500);
         },
         this

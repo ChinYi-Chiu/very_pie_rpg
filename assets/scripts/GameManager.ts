@@ -1,5 +1,6 @@
 import { _decorator, animation, Animation, AnimationClip, Component, error, EventMouse, input, Input, JsonAsset, Label, Node, TextAsset, Tween, tween, Vec3 } from 'cc';
 import { TextShowerRandy } from './TextShowerRandy';
+import { AudioController } from "./AudioController";
 const { ccclass, property } = _decorator;
 
 enum StoryState {
@@ -106,6 +107,9 @@ export class GameManager extends Component {
     @property(TextShowerRandy)
     private textShowerRandy: TextShowerRandy | null = null;
 
+    @property(AudioController)
+    AudioController: AudioController|null=null;
+
     updateState(newState: StoryState) {
         this.currentState = newState;
         console.log('State changed to:', StoryState[this.currentState]);
@@ -123,7 +127,6 @@ export class GameManager extends Component {
         }*/
 
         let scene: IScene | ISituation_Pop | IEvent | IDialog = this.story.scenes[0];
-
         // event 邏輯
         if (scene.type == "event") {
             this.listenMouse(false); // 關閉滑鼠事件
@@ -290,6 +293,7 @@ export class GameManager extends Component {
 
     onMouseUp(event: EventMouse) {
         if (event.getButton() === 0) {
+            this.AudioController.play("Click");
             if (this.currentState == StoryState.SS_SITUATION) {
                 return this.updateState(StoryState.SS_OPTION);
             }
@@ -350,6 +354,7 @@ export class GameManager extends Component {
         if (!speaking) {
             this.speakingMask.active = false;
             role.setSiblingIndex(this.speakingMask.getSiblingIndex() - 1);
+            console.log(role.getSiblingIndex());
             return Tween.stopAllByTarget(role);
         }
         this.speakingMask.active = true;
@@ -366,6 +371,7 @@ export class GameManager extends Component {
 
         // 重複搖，搖到死，搖到他媽變單親媽媽。
         tween(role).repeat(Number.MAX_VALUE, t).start();
+        console.log(role.getSiblingIndex());
     }
 
     /**

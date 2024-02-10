@@ -11,6 +11,7 @@ import {
 import { TextShower } from "./TextShower";
 //import { TextShowerFu } from "./TextShowerFu";
 import { TextShowerRandy } from './TextShowerRandy';
+import { AudioController } from "./AudioController";
 const { ccclass, property } = _decorator;
 
 interface EffectDetail {
@@ -85,6 +86,8 @@ export class BattleManager extends Component {
   @property(Animation)
   Fight_SceneTrans_Start: Animation | null = null;
 
+  @property(AudioController)
+  AudioController: AudioController|null=null;
   private battleData: BattleData;
   private TozyCurrentHP: number = 0;
   private TozyCurrentStatus: Record<string, number> = {};
@@ -93,10 +96,12 @@ export class BattleManager extends Component {
   private currentTurn: number = 0;
   private isPlayerTurn: boolean = true; // 初始設定為玩家回合
 
+
   start() {
     // 假設你已經將fight.json加載到fightSetting中
     this.battleData = this.fightSetting.json as BattleData;
     this.initializeBattle();
+
     // 播放轉場動畫
     this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start");
 
@@ -146,6 +151,7 @@ export class BattleManager extends Component {
 
   // 玩家選擇閃避
   onDodge() {
+    this.AudioController.play("Click");
     this.enableDodgeButton(false); // 禁用閃避按鈕
     const playerSkills = this.battleData.skills.player;
     const dodgeSkill = playerSkills.find((s) => s.id === "Dodge");
