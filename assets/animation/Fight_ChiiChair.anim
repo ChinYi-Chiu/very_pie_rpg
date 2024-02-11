@@ -28,18 +28,7 @@
       }
     ],
     "_exoticAnimation": null,
-    "_events": [
-      {
-        "frame": 0.5,
-        "func": "",
-        "params": []
-      },
-      {
-        "frame": 0.5,
-        "func": "ChairAnimeEnd",
-        "params": []
-      }
-    ],
+    "_events": [],
     "_embeddedPlayers": [],
     "_additiveSettings": {
       "__id__": 36
