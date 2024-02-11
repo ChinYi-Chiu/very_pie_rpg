@@ -7,7 +7,7 @@ export class MainMenuManager extends Component {
     start() {
 
         this.settingBtn?.node.on(Node.EventType.MOUSE_UP, this.openSettingMenu, this);
-        this.newGameBtn?.node.on(Node.EventType.MOUSE_UP, this.changetoRpgScene, this);
+        this.newGameBtn?.node.once(Node.EventType.MOUSE_UP, this.changetoRpgScene, this);
     }
 
     update(deltaTime: number) {
