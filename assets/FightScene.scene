@@ -66,7 +66,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 264
+      "__id__": 266
     },
     "_id": "b37d478f-4dec-48e0-9473-b2d0765452dd"
   },
@@ -187,7 +187,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 365.0281425891182,
+    "_orthoHeight": 360,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -7018,6 +7018,9 @@
       },
       {
         "__id__": 262
+      },
+      {
+        "__id__": 264
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -7315,30 +7318,52 @@
     ]
   },
   {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 148
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "musicToggleButton"
+    ],
+    "target": {
+      "__id__": 203
+    },
+    "targetInfo": {
+      "__id__": 265
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "8a+TJC1KFBObGej7WrxP9W"
+    ]
+  },
+  {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 265
-    },
-    "shadows": {
-      "__id__": 266
-    },
-    "_skybox": {
       "__id__": 267
     },
-    "fog": {
+    "shadows": {
       "__id__": 268
     },
-    "octree": {
+    "_skybox": {
       "__id__": 269
     },
-    "skin": {
+    "fog": {
       "__id__": 270
     },
-    "lightProbeInfo": {
+    "octree": {
       "__id__": 271
     },
-    "postSettings": {
+    "skin": {
       "__id__": 272
+    },
+    "lightProbeInfo": {
+      "__id__": 273
+    },
+    "postSettings": {
+      "__id__": 274
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
