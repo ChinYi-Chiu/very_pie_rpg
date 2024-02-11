@@ -78,6 +78,18 @@ export class AudioController extends Component {
 
     @property(AudioSource)//點擊音效
     Click: AudioSource | null = null;
+
+    @property(AudioSource)
+    Smash: AudioSource | null = null;
+
+    @property(AudioSource)
+    Look: AudioSource | null = null;
+
+    @property(AudioSource)
+    Camera: AudioSource | null = null;
+
+    @property(AudioSource)
+    Mouse: AudioSource | null = null;
 }
 
 

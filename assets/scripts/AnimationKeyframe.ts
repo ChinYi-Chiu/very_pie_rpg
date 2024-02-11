@@ -1,5 +1,6 @@
 import { _decorator, Component, director, find, Animation, Node  } from 'cc';
 import { TextShower } from "./TextShower";
+import { AudioController } from "./AudioController";
 const { ccclass, property  } = _decorator;
 
 
@@ -20,6 +21,9 @@ export class AnimationKeyframe extends Component {
     public Chair: Node = null;
     @property(Node)
     public Sack: Node = null;
+
+    @property(AudioController)
+    AudioController: AudioController|null=null;
 
     /*private playAnimation(nodePath: string, animationName: string) {
         const bodyNode = find(nodePath);
@@ -42,13 +46,17 @@ export class AnimationKeyframe extends Component {
         director.loadScene('FightScene');
     }*/
 
+    BleedAnime_Bleed(){
+        this.AudioController.play("Smash");
+    }
+
     BleedAnime_End(){
         director.loadScene('EndingA');
     }
 
     //???
     BleedAnime_ChangeSprite(){
-        
+        //this.AudioController.play("");
         this.textShower.showText = "起哥:古人說過，忍無可忍，無須再忍。超派!!!!!!";
         this.textShower.OnShowTextOneByOne();
 
@@ -60,6 +68,10 @@ export class AnimationKeyframe extends Component {
         this.setActive(this.Sack, false);
     }
     
+    EndingA_Start_Camera(){
+        this.AudioController.play("Camera");
+    }
+
     EndingA_Start_ChiiSpeeking(){
 
         this.textShower.showText = "我的師父都是有20~30年經驗的日料師傅,做出來的東西怎麼可能難吃...";
