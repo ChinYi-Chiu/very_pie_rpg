@@ -78,5 +78,8 @@ export class AnimationKeyframe extends Component {
         this.textShower.OnShowTextOneByOne();
 
     }
+    EndingA_Start_Mouse(){
+        this.AudioController.play("Mouse");
+    }
 
 }

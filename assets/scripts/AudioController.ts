@@ -51,6 +51,9 @@ export class AudioController extends Component {
     chiiWalking: AudioSource | null = null;
 
     @property(AudioSource)
+    chii_pie_story_fight: AudioSource | null = null;
+
+    @property(AudioSource)
     startPage: AudioSource | null = null;
 
     // 音訊來源 (bgm)

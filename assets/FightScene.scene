@@ -5659,7 +5659,7 @@
       "__uuid__": "4fbae988-d57b-466e-bf13-da16621b141a",
       "__expectedType__": "cc.AudioClip"
     },
-    "_loop": false,
+    "_loop": true,
     "_playOnAwake": false,
     "_volume": 1,
     "_id": "31zJPBeoVCkLGwb8bYGPR4"

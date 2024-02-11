@@ -36,6 +36,16 @@
     "_exoticAnimation": null,
     "_events": [
       {
+        "frame": 7.35,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 7.35,
+        "func": "EndingA_Start_Camera",
+        "params": []
+      },
+      {
         "frame": 7.533333333333333,
         "func": "",
         "params": []
@@ -43,6 +53,16 @@
       {
         "frame": 7.533333333333333,
         "func": "EndingA_Start_ChiiSpeeking",
+        "params": []
+      },
+      {
+        "frame": 13.916666666666666,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 13.916666666666666,
+        "func": "EndingA_Start_Mouse",
         "params": []
       }
     ],
