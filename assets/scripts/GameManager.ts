@@ -267,6 +267,7 @@ export class GameManager extends Component {
             if (this._dialogs.dialogs.length == 0) { // 檢查還有沒有
                 this._dialogs = null;
                 this.updateState(StoryState.SS_SITUATION); // 繼續下個狀態
+                return;
             }
             this.toggleNextPageHint(false);
             this.dialogContent.string = this._dialogs.dialogs[0].speak;
