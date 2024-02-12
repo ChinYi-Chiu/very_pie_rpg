@@ -110,6 +110,10 @@ export class GameManager extends Component {
     @property(AudioController)
     AudioController: AudioController|null=null;
 
+    @property(Node)
+    private settingBtn: Node | null = null;
+
+
     updateState(newState: StoryState) {
         this.currentState = newState;
         console.log('State changed to:', StoryState[this.currentState]);
@@ -257,7 +261,15 @@ export class GameManager extends Component {
         if (this.jsonStory) this.story = this.jsonStory.json as IStory;
         // 從第一個場景開始
         this.updateState(StoryState.SS_SITUATION);
+
+        
+        this.settingBtn?.on(Node.EventType.MOUSE_UP, this.openSettingMenu, this);
     }
+
+    openSettingMenu() {
+        this.node.getParent().getChildByName("SettingPage").active = true;
+    }
+
 
     private _dialogs: IDialog | null = null // 暫存要播的對話
     private readDialogs() {

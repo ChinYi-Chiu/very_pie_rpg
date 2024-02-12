@@ -2506,6 +2506,7 @@
     "AudioController": {
       "__id__": 107
     },
+    "settingBtn": null,
     "_id": "68+p8A97tDTbve9mrZr5Pv"
   },
   {
@@ -3911,9 +3912,6 @@
     "bgm1": {
       "__id__": 115
     },
-    "musicToggleButton": {
-      "__id__": 25
-    },
     "indoor_scenetrans_end": {
       "__id__": 119
     },
@@ -4238,7 +4236,7 @@
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": true,
-    "_playOnAwake": true,
+    "_playOnAwake": false,
     "_volume": 1,
     "_id": "fadNO8AwlNC52ARQn/OXml"
   },
