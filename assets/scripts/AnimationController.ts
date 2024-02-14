@@ -11,7 +11,7 @@ import {
 } from "cc";
 import { GameManager } from "./GameManager";
 import { AudioController } from "./AudioController";
-import { BattleManager } from "./BattleManager_test";
+import { BattleManager } from "./BattleManager";
 const { ccclass, property } = _decorator;
 
 /**

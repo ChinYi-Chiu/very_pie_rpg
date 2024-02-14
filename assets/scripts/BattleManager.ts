@@ -1,201 +1,409 @@
 import {
   _decorator,
-  CCInteger,
   Component,
-  Node,
+  JsonAsset,
   ProgressBar,
+  Button,
+  Label,
   Tween,
-  tween,
-  Vec2,
-  Vec3,
   Animation,
-  find,
 } from "cc";
 import { TextShower } from "./TextShower";
+import { AudioController } from "./AudioController";
+import { TextShowerRandy } from "./TextShowerRandy";
 const { ccclass, property } = _decorator;
+
+interface EffectDetail {
+  status?: string;
+  duration?: number;
+  damage?: number;
+  animation?: string | string[];
+  effect?: string;
+}
+
+interface Effect {
+  effect_player?: EffectDetail;
+  effect_opponent?: EffectDetail;
+  description?: string;
+  animation?: string;
+}
+
+interface Skill {
+  id: string;
+  target: string;
+  type: string;
+  description: string;
+  effects: {
+    normal: Effect;
+    dodge?: Effect;
+    blind?: Effect;
+  };
+}
+
+interface CharacterState {
+  HP: number;
+  Rage?: number;
+  statusEffects: { [key: string]: any };
+}
+
+interface BattleData {
+  characters: {
+    Tozy: CharacterState;
+    Chii: CharacterState;
+  };
+  skills: {
+    player: Skill[];
+    opponent: Skill[];
+  };
+}
 
 @ccclass("BattleManager")
 export class BattleManager extends Component {
-  //TODO:
-  /*
-"結局A
-戰鬥過程
-選鬼之閃避
-超派鐵拳
-選鬼之閃避
-蓋布袋
-致盲
-椅子砸椅子"
+  //角色資訊
+  @property(JsonAsset)
+  private fightSetting: JsonAsset | null = null;
 
-"結局A
-戰鬥結束
-toyz 背對衣服掀起
-超派勝利往前指喊超派
-黑幕
-超哥接受記者訪問:我的師父都是有2 30年經驗的日料師傅，做出來的東西怎麼可能難吃(料理鼠王的畫面慢慢浮出)"
+  //血量條
+  @property(ProgressBar)
+  public ChiiHPBar: ProgressBar | null = null;
+  @property(ProgressBar)
+  public TozyHPBar: ProgressBar | null = null;
 
+  // 玩家控制按鈕
+  @property(Button)
+  dodgeButton: Button = null!;
+
+  //對話框
+  @property(Label)
+  public dialogContent: Label | null = null;
+  //@property(TextShowerFu)
+  //private textShowerRandy: TextShowerFu | null = null;
+  @property(TextShowerRandy)
+  private textShowerRandy: TextShowerRandy | null = null;
+
+  //動畫
+  @property(Animation)
+  Fight_SceneTrans_Start: Animation | null = null;
+
+  @property(AudioController)
+  AudioController: AudioController | null = null;
+  private battleData: BattleData;
+  private TozyCurrentHP: number = 0;
+  private TozyCurrentStatus: Record<string, number> = {};
+  private ChiiCurrentHP: number = 0;
+  private ChiiCurrentStatus: Record<string, number> = {};
+  private currentTurn: number = 0;
+  private isPlayerTurn: boolean = true; // 初始設定為玩家回合
+
+  start() {
+    // 假設你已經將fight.json加載到fightSetting中
+    this.battleData = this.fightSetting.json as BattleData;
+    this.initializeBattle();
+
+    // 播放轉場動畫
+    this.Fight_SceneTrans_Start.play("Fight_SceneTrans_Start");
+
+    // 監聽動畫完成事件
+    this.Fight_SceneTrans_Start.on(
+      Animation.EventType.FINISHED,
+      () => {
+        this.roundStart();
+      },
+      this
+    );
+  }
+
+  initializeBattle() {
+    const { Tozy, Chii } = this.battleData.characters;
+    this.TozyCurrentHP = Tozy.HP;
+    this.ChiiCurrentHP = Chii.HP;
+    this.TozyCurrentStatus = Tozy.statusEffects;
+    this.ChiiCurrentStatus = Chii.statusEffects;
+    this.updateUI();
+  }
+
+  roundStart() {
+    //玩家先手
+    if (this.isPlayerTurn) {
+      this.currentTurn++;
+      console.log("Round " + this.currentTurn + " start.");
+      this.updateStatusDuration();
+      console.log("Player's turn.");
+      this.playerTakesTurn();
+    } else {
+      console.log("opponet's turn.");
+      this.opponentTakesTurn();
+    }
+  }
+
+  // 玩家行動的邏輯...
+  playerTakesTurn() {
+    this.enableDodgeButton(true);
+    //其他按鈕
+  }
+
+  enableDodgeButton(enable: boolean) {
+    this.dodgeButton.interactable = enable;
+    if (enable) {
+      this.dodgeButton.node.on(Button.EventType.CLICK, this.onDodge, this);
+    } else {
+      this.dodgeButton.node.off(Button.EventType.CLICK, this.onDodge, this);
+    }
+  }
+
+  // 玩家選擇閃避
+  onDodge() {
+    this.AudioController.play("Click");
+    this.enableDodgeButton(false); // 禁用閃避按鈕
+    const playerSkills = this.battleData.skills.player;
+    const dodgeSkill = playerSkills.find((s) => s.id === "Dodge");
+    console.log(`player uses ${dodgeSkill.id}`);
+    this.isPlayerTurn = false;
+    if (dodgeSkill) {
+      this.applySkillEffect(dodgeSkill);
+    }
+  }
+
+  //先預設回合動作，以後會改
+  opponentTakesTurn() {
+    this.isPlayerTurn = true;
+    const chiiSkills = this.battleData.skills.opponent;
+    let skill: Skill;
+    switch (this.currentTurn) {
+      case 1:
+        skill = chiiSkills.find((s) => s.id === "Pie")!;
+        break;
+      case 2:
+        skill = chiiSkills.find((s) => s.id === "Sack")!;
+        break;
+      case 3:
+        skill = chiiSkills.find((s) => s.id === "Chair")!;
+        break;
+      default:
+        console.log("Chii is thinking...");
+        return;
+    }
+    console.log(`Chii uses ${skill.id}`);
+    this.applySkillEffect(skill);
+  }
+
+  applySkillEffect(skill: Skill) {
+    this.displaySkillDescription(skill.description, null);
+
+    this.textShowerRandy.node.once("textingEnd", () => {
+      setTimeout(() => {
+        const target = skill.target === "player" ? "Tozy" : "Chii";
+        let targetStatusArray: Record<string, number>;
+        if (skill.target === "player") {
+          targetStatusArray = this.TozyCurrentStatus;
+        } else {
+          targetStatusArray = this.ChiiCurrentStatus;
+        }
+        const status = this.checkCharacterStatus(targetStatusArray);
+        console.log(target + " " + status);
+
+        this.handleEffectDetail(skill, status, target)
+          .then(() => {
+            //等待handleEffectDetail返回後再執行
+            return this.updateUI();
+          })
+          .then(() => {
+            // 等待updateUI動畫完成後再執行checkEndGameOrNextRound
+            this.checkEndGameOrNextRound();
+          });
+      }, 500);
+    });
+  }
+
+  //顯示技能描述
+  displaySkillDescription(skillDescription: string, effectDescription: string) {
+    this.dialogContent.string = skillDescription || effectDescription;
+    this.textShowerRandy?.active(true);
+  }
+
+  //檢查角色狀態
+  checkCharacterStatus(TozyCurrentStatus: Record<string, any>): string {
+    if (TozyCurrentStatus["dodge"]) return "dodge";
+    if (TozyCurrentStatus["blind"]) return "blind";
+    return "normal";
+  }
+
+  //處理技能效果
+  async handleEffectDetail(
+    skill: Skill,
+    status: string,
+    target: string
+  ): Promise<void> {
+    let effectsToApply = [];
+    let effectDescription = ""; // 儲存效果描述的變數
+
+    /*
+    ...
+    在這裡寫憤怒系統
+    ...
     */
-  @property(CCInteger)
-  public ChiiHP = 3;
-  @property(CCInteger)
-  public TozyHP = 3;
 
-  @property(ProgressBar)
-  public ChiiHPBar: ProgressBar;
-  @property(ProgressBar)
-  public TozyHPBar: ProgressBar;
+    this.animationController(skill, status);
 
-  @property(TextShower)
-  public textShower: TextShower;
+    // 根據角色狀態選擇效果和描述
+    if (status !== "normal" && skill.effects[status]) {
+      effectsToApply.push(skill.effects[status].effect_player);
+      effectsToApply.push(skill.effects[status].effect_opponent);
+      effectDescription = skill.effects[status].description; // 獲取對應狀態的描述
+    } else {
+      effectsToApply.push(skill.effects.normal.effect_player);
+      effectsToApply.push(skill.effects.normal.effect_opponent);
+      effectDescription = skill.effects.normal.description; // 獲取普通狀態的描述
+    }
 
-  @property(Node)
-  public Hand: Node;
+    console.log(effectsToApply);
+    console.log(effectDescription);
 
-  @property(Node)
-  public Chair: Node;
+    // 在此處理所有效果
+    for (const effectDetail of effectsToApply) {
+      if (effectDetail) {
+        this.applyEffect(effectDetail, target);
+      }
+    }
 
-  @property(Node)
-  public Black: Node;
+    // 顯示效果描述
+    if (this.dialogContent && effectDescription) {
+      this.displaySkillDescription("", effectDescription); // 如果displaySkillDescription不接受null，則传递空字符串
+      await new Promise<void>((resolve) =>
+        this.textShowerRandy.node.once("textingEnd", () => {
+          setTimeout(resolve, 500); // 延遲500毫秒後解決Promise
+        })
+      );
+    }
+  }
 
-  @property(Node)
-  public BagNode: Node;
+  // 動畫控制
+  animationController(skill: Skill, status: string) {
+    const effect = skill.effects[status] || skill.effects.normal;
+    if (effect.animation) {
+      console.log("Emitting animation event:", effect.animation);
+      this.node.emit(effect.animation);
+    }
 
-  @property(Node)
-  public tozyPosition: Node;
+    // 檢查動畫數量
+    if (effect.animations) {
+      effect.animations.forEach((animationName: string) => {
+        console.log("Emitting animation event:", animationName);
+        this.node.emit(animationName);
+      });
+    }
+  }
 
-  @property(Node)
-  public chiiPosition: Node;
+  applyEffect(effectDetail: EffectDetail, target: string) {
+    if (effectDetail.damage != null && effectDetail.damage != 0) {
+      console.log(effectDetail.damage);
+      console.log(target);
+      this.countDamage(effectDetail, target);
+    }
+    this.handleCharactetStatus(effectDetail, target);
+  }
 
-  @property(Node)
-  public tozy: Node;
+  // 應用傷害
+  countDamage(effectDetail: EffectDetail, target: string) {
+    if (target === "Tozy") {
+      this.TozyCurrentHP = Math.max(
+        0,
+        this.TozyCurrentHP - effectDetail.damage
+      );
+      this.node.emit("Fight_TozyHurt");
+      console.log(`Tozy receives ${effectDetail.damage} damage.`);
+    } else if (target === "Chii") {
+      this.ChiiCurrentHP = Math.max(
+        0,
+        this.ChiiCurrentHP - effectDetail.damage
+      );
+      console.log(`Chii receives ${effectDetail.damage} damage.`);
+    }
+  }
 
-  @property(Node)
-  public buttonDodge: Node;
+  // 處理狀態
+  handleCharactetStatus(effectDetail: EffectDetail, target: string) {
+    let currentStatus =
+      target === "Tozy" ? this.TozyCurrentStatus : this.ChiiCurrentStatus;
 
-  @property(Node)
-  public dodgeNode: Node;
-
-  private nextChiiStep = () => {};
-
-  private isDodging: boolean = false;
-  private isSacking: boolean = false;
-
-  private playAnimation(nodePath: string, animationName: string) {
-    const bodyNode = find(nodePath);
-    if (bodyNode) {
-      const animation = bodyNode.getComponent(Animation);
-      if (animation) {
-        animation.play(animationName);
+    if (effectDetail.status && effectDetail.duration) {
+      if (currentStatus[effectDetail.status]) {
+        currentStatus[effectDetail.status] = Math.max(
+          currentStatus[effectDetail.status],
+          effectDetail.duration
+        );
+      } else {
+        currentStatus[effectDetail.status] = effectDetail.duration;
       }
     }
   }
 
-  //鬼之閃避(可閃超派鐵拳)
-  public Dodge() {
-    if (!this.isDodging) {
-      this.isDodging = true;
-      this.nextChiiStep = this.Pie;
-      this.scheduleOnce(this.nextChiiStep);
+  //更新狀態持續時間
+  updateStatusDuration() {
+    // 更新Tozy的狀態持續時間
+    Object.keys(this.TozyCurrentStatus).forEach((status) => {
+      this.TozyCurrentStatus[status]--;
+      if (this.TozyCurrentStatus[status] <= 0) {
+        delete this.TozyCurrentStatus[status];
+      }
+    });
+
+    // 更新Chii的狀態持續時間
+    Object.keys(this.ChiiCurrentStatus).forEach((status) => {
+      this.ChiiCurrentStatus[status]--;
+      if (this.ChiiCurrentStatus[status] <= 0) {
+        delete this.ChiiCurrentStatus[status];
+      }
+    });
+  }
+
+  // 檢查是否遊戲結束
+  checkEndGameOrNextRound() {
+    if (this.TozyCurrentHP <= 0) {
+      this.node.emit("Fight_SceneTrans_EndingA");
+      // 可以在這裡調用遊戲結束的UI更新函式
+    } else if (this.ChiiCurrentHP <= 0) {
     } else {
-      this.nextChiiStep = this.Bag;
-      this.scheduleOnce(this.nextChiiStep);
-    }
-    /*this.isDodging = true;
-        this.nextChiiStep = this.Pie;
-        this.scheduleOnce(this.nextChiiStep);*/
-  }
-
-  //邏輯壓制(超哥殺紅了眼，效果甚微)
-  public Logic() {
-    this.textShower.showText = "超哥殺紅了眼，效果甚微";
-    this.textShower.OnShowTextOneByOne();
-  }
-
-  //野獸の組合拳(扣全部血，進入toyz提前進監結局)
-  public Combo() {
-    this.TryKillChii(3);
-  }
-
-  //誠懇道歉(超哥殺紅了眼，效果甚微)
-  public Sorry() {
-    this.textShower.showText = "起哥殺紅了眼，效果甚微";
-    this.textShower.OnShowTextOneByOne();
-  }
-
-  //超派鐵拳(扣1/3血)
-  public Pie() {
-    if (this.isDodging) {
-      this.playAnimation("Canvas/Visual/Tozy/body", "Fight_Dodge");
-      this.playAnimation("Canvas/Visual/Tozy_Dodge", "Fight_ChiiFist");
-      this.textShower.showText = "你躲掉起哥的攻擊了";
-      this.textShower.OnShowTextOneByOne();
-      this.nextChiiStep = this.Bag;
-    }
-    if (this.TryKillTozy(1)) {
-      console.log("有扣寫");
-    } else {
+      // 遊戲未結束，進行下一回合
+      this.roundStart();
     }
   }
 
-  //蓋布袋(使致盲無法行動)
-  public Bag() {
-    if (!this.isSacking) {
-      this.textShower.showText = "你無法躲開蓋布袋,現在眼前一片黑暗";
-      this.textShower.OnShowTextOneByOne();
-      this.playAnimation("Canvas/Visual/Tozy_Sack", "Fight_Sack");
-      this.isSacking = true;
-    } else {
-      this.nextChiiStep = this.ChairAttack;
-      this.scheduleOnce(this.nextChiiStep);
-    }
+  playerWins() {
+    // 玩家勝利的處理，例如顯示勝利信息
+    // ...
   }
 
-  //椅子砸椅子(扣2/3血)
-  public ChairAttack() {
-    //Demo版其實也不用扣了，直接打死\
-    this.textShower.showText = "起哥抄起椅子把你打暈了";
-    this.textShower.OnShowTextOneByOne();
-    this.playAnimation("Canvas/Visual/Tozy_Chair", `Fight_ChiiChair`);
-    this.TryKillTozy(3);
-    tween(this.TozyHPBar);
-    /*
-    if (this.TryKillTozy(3)) {
-            this.playAnimation();
-        }
-        else {
-            //沒死動作
-            tween(this.TozyHPBar);
-        }
-        return;
-    */
+  opponentWins() {
+    // 對手勝利的處理，例如顯示失敗信息
+    // ...
   }
 
-  public ToEndA() {}
+  async updateUI(): Promise<void> {
+    let promises = [];
 
-  public TryKillTozy(hp: number): boolean {
-    let isDie = false;
-    this.TozyHP -= hp;
-    isDie = this.TozyHP <= 0;
-    if (isDie) this.TozyHP = 0;
-    tween(this.TozyHPBar)
-      .to(3, { progress: this.TozyHP })
-      .call(() => {
-        if (isDie) this.playAnimation("Canvas/Visual/Foregorund", `Fight_Bleed`);
+    promises.push(
+      new Promise<void>((resolve) => {
+        new Tween(this.ChiiHPBar)
+          .to(1, {
+            progress: this.ChiiCurrentHP / this.battleData.characters.Chii.HP,
+          })
+          .call(resolve) // 當Tween完成時，調用resolve
+          .start();
       })
-      .start();
-    return isDie;
+    );
+
+    promises.push(
+      new Promise<void>((resolve) => {
+        new Tween(this.TozyHPBar)
+          .to(1, {
+            progress: this.TozyCurrentHP / this.battleData.characters.Tozy.HP,
+          })
+          .call(resolve) // 當Tween完成時，調用resolve
+          .start();
+      })
+    );
+
+    await Promise.all(promises);
   }
-
-  public TryKillChii(hp: number): boolean {
-    let isDie = false;
-    this.ChiiHP -= hp;
-    isDie = this.ChiiHP <= 0;
-    if (isDie) this.ChiiHP = 0;
-    tween(this.ChiiHPBar).to(1, { progress: this.ChiiHP }).start();
-    return isDie;
-  }
-
-  start() {}
-
-  update(deltaTime: number) {}
 }
