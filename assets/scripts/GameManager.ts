@@ -23,7 +23,7 @@ enum StoryState {
  * 後面有 ? 的為選填項，除了選填項其他請務必一定要填入值
  */
 interface IStory {
-    scenes: (IScene | ISituation_Pop | IEvent | IDialog )[]
+    scenes: (IScene | ISituation_Pop | IEvent | IDialog)[]
 }
 interface IScene { //場景
     type: "scene",
@@ -35,7 +35,7 @@ interface IScene { //場景
         speak?: string, //講的話的文字
     }[]
 }
-interface ISituation_Pop{
+interface ISituation_Pop {
     type: "pop",
     situation: string
 }
@@ -51,7 +51,7 @@ interface IDialog { //對話
         role: string, //說話的角色
         speak: string, //說的話
     }[]
-} 
+}
 
 @ccclass('GameManager')
 export class GameManager extends Component {
@@ -108,7 +108,7 @@ export class GameManager extends Component {
     private textShowerRandy: TextShowerRandy | null = null;
 
     @property(AudioController)
-    AudioController: AudioController|null=null;
+    AudioController: AudioController | null = null;
 
     @property(Node)
     private settingBtn: Node | null = null;
@@ -160,14 +160,14 @@ export class GameManager extends Component {
         }
 
         // situation_pop 邏輯
-        else if(scene.type == "pop"){
-            if(this.currentState==StoryState.SS_POP_END){
+        else if (scene.type == "pop") {
+            if (this.currentState == StoryState.SS_POP_END) {
                 this.story.scenes.shift(); // 把 situation_pop 退出來
                 this.situationLabel.active = false;
                 this.situationMask.active = false;
                 this.toggleNextPageHint(false);
                 this.updateState(StoryState.SS_SITUATION);
-            }else if(this.currentState!=StoryState.SS_POP){
+            } else if (this.currentState != StoryState.SS_POP) {
                 this.listenMouse(false);
                 this.optionShow(false);
                 // this.dialogContent.string = scene.situation;
@@ -195,9 +195,9 @@ export class GameManager extends Component {
 
             switch (this.currentState) {
                 case StoryState.SS_SITUATION:
-                    if (scene.situation=="") {
+                    if (scene.situation == "") {
                         this.updateState(StoryState.SS_OPTION);
-                    }else{
+                    } else {
                         this.optionShow(false);
                         // this.dialogContent.string = scene.situation;
                         // this.roleSpeaking(false);
@@ -262,7 +262,8 @@ export class GameManager extends Component {
         // 從第一個場景開始
         this.updateState(StoryState.SS_SITUATION);
 
-        
+
+        this.node.getParent().getChildByName("SettingPage").active = false;
         this.settingBtn?.on(Node.EventType.MOUSE_UP, this.openSettingMenu, this);
     }
 
@@ -356,7 +357,7 @@ export class GameManager extends Component {
     }
 
 
-    
+
     /**
      * 當角色在講話時要做的事
      * @param role 傳入角色

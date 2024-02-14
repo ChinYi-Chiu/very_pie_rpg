@@ -1,4 +1,4 @@
-import { _decorator, AudioClip, AudioSource, Button, Component, Label, Node , Slider } from 'cc';
+import { _decorator, AudioClip, AudioSource, Button, Component, Label, Node, Slider } from 'cc';
 import { AnimationController } from './AnimationController';
 const { ccclass, property } = _decorator;
 
@@ -28,7 +28,7 @@ export class AudioController extends Component {
     }
     updateEV(v: number) {
         for (let effect of this.effects) {
-            effect.volume = v;
+            if (effect) effect.volume = v;
         }
     }
 
@@ -51,19 +51,19 @@ export class AudioController extends Component {
     // 所有 bgm
     effects: AudioSource[] = [];
     start() {
-       this.effects.push(this.chiiWalking);
-       this.effects.push(this.startPage);
-       this.effects.push(this.chii_pie_story_fight);
-       this.effects.push(this.indoor_scenetrans_end);
-       this.effects.push(this.Fight_ChiiChair);
-       this.effects.push(this.Fight_ChiiSack);
-       this.effects.push(this.Fight_ChiiFist);
-       this.effects.push(this.Fight_Dodge);
-       this.effects.push(this.Click);
-       this.effects.push(this.Smash);
-       this.effects.push(this.Look);
-       this.effects.push(this.Camera);
-       this.effects.push(this.Mouse);
+        this.effects.push(this.chiiWalking);
+        this.effects.push(this.startPage);
+        this.effects.push(this.chii_pie_story_fight);
+        this.effects.push(this.indoor_scenetrans_end);
+        this.effects.push(this.Fight_ChiiChair);
+        this.effects.push(this.Fight_ChiiSack);
+        this.effects.push(this.Fight_ChiiFist);
+        this.effects.push(this.Fight_Dodge);
+        this.effects.push(this.Click);
+        this.effects.push(this.Smash);
+        this.effects.push(this.Look);
+        this.effects.push(this.Camera);
+        this.effects.push(this.Mouse);
     }
 
     @property(AudioSource)

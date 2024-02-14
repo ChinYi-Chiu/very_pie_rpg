@@ -5,6 +5,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Setting')
 export class Setting extends Component {
+    protected onDisable(): void {
+        this.start();
+    }
     start() {
         // Setting._instance = this;
         this.exitBtn?.node.on(Node.EventType.MOUSE_UP, () => { this.node.active = false; }, this);
@@ -15,6 +18,8 @@ export class Setting extends Component {
         this.MVP.getComponentInChildren(Button).node.on(Node.EventType.TRANSFORM_CHANGED, this.updateMVP, this);
         this.EVP.getComponentInChildren(Button).node.on(Node.EventType.TRANSFORM_CHANGED, this.updateEVP, this);
         this.updateMVP();
+        this.updateEVP();
+        console.log("s");
     }
 
     update(deltaTime: number) {
