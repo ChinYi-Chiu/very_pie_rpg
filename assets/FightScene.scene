@@ -187,7 +187,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 365.0281425891182,
+    "_orthoHeight": 360,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -6940,7 +6940,7 @@
       "__expectedType__": "cc.JsonAsset"
     },
     "gameManager": null,
-    "battleManager_test": {
+    "battleManager": {
       "__id__": 144
     },
     "audioController": {

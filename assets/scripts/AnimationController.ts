@@ -140,7 +140,7 @@ export class AnimationController extends Component {
           this
         );
       } else if (l_type === "skill") {
-        this.battleManager_test?.node.on(
+        this.battleManager?.node.on(
           l_controller_id,
           (ev: Event) => {
             this[l_node_id]?.play(l_animation_id); //播動畫
@@ -155,7 +155,7 @@ export class AnimationController extends Component {
       }
     }
 
-    this.battleManager_test?.node.on(
+    this.battleManager?.node.on(
       "Fight_SceneTrans_Start",
       (ev: Event) => {
         console.log("play Fight_SceneTrans_Start");
@@ -167,7 +167,7 @@ export class AnimationController extends Component {
       this
     );
 
-    this.battleManager_test?.node.on(
+    this.battleManager?.node.on(
       "Fight_TozyHurt",
       (ev: Event) => {
         console.log("play Fight_TozyHurt");
@@ -179,7 +179,7 @@ export class AnimationController extends Component {
       this
     );
 
-    this.battleManager_test?.node.on(
+    this.battleManager?.node.on(
       "Fight_SceneTrans_EndingA",
       (ev: Event) => {
         this.Fight_SceneTrans_End.play("Fight_SceneTrans_EndingA"); //播動畫
@@ -198,7 +198,7 @@ export class AnimationController extends Component {
   gameManager: GameManager | null = null;
 
   @property(BattleManager)
-  battleManager_test: BattleManager | null = null;
+  battleManager: BattleManager | null = null;
 
   @property(AudioController)
   audioController: AudioController | null = null;
