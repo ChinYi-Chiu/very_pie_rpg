@@ -50,7 +50,7 @@
         "id": "Pie",
         "target": "player",
         "type": "attack",
-        "description": "Chii使用超派鐵拳,造成直接傷害。",
+        "description": "起哥使用超派鐵拳,造成直接傷害。",
         "effects": {
           "normal": {
             "effect_player": {
@@ -84,7 +84,7 @@
         "id": "Sack",
         "target": "player",
         "type": "debuff",
-        "description": "Chii使用蓋布袋。",
+        "description": "起哥使用蓋布袋。",
         "effects": {
           "normal": {
             "effect_player": {
@@ -117,7 +117,7 @@
         "id": "Chair",
         "target": "player",
         "type": "attack",
-        "description": "Chii抄起椅子砸向Tozy。",
+        "description": "起哥抄起椅子砸向Tozy。",
         "effects": {
           "normal": {
             "effect_player": {

@@ -7,6 +7,7 @@ import {
     Label,
     Tween,
     Animation,
+    Node,
   } from "cc";
   import { AudioController } from "./AudioController";
   import { TextShowerRandy } from "./TextShowerRandy";
@@ -94,6 +95,9 @@ import {
     private currentTurn: number = 0;
     private isPlayerTurn: boolean = true; // 初始設定為玩家回合
   
+    @property(Node)
+    private settingBtn: Node | null = null;
+
     start() {
       // 假設你已經將fight.json加載到fightSetting中
       this.battleData = this.fightSetting.json as BattleData;
@@ -110,8 +114,13 @@ import {
         },
         this
       );
+      this.node.getParent().getChildByName("SettingPage").active = false;
+      this.settingBtn?.on(Node.EventType.MOUSE_UP, this.openSettingMenu, this);
+      
     }
-  
+    openSettingMenu() {
+      this.node.getParent().getChildByName("SettingPage").active = true;
+    }
     initializeBattle() {
       const { Tozy, Chii } = this.battleData.characters;
       this.TozyCurrentHP = Tozy.HP;
