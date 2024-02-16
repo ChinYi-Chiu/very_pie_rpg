@@ -71,22 +71,32 @@ import {
   
     // 玩家控制按鈕
     @property(Button)
-    dodgeButton: Button = null!;
+    DodgeBtn: Button = null!;
+    @property(Button)
+    LogicBtn: Button = null!;
+    @property(Button)
+    ComboBtn: Button = null!;
+    @property(Button)
+    SorryBtn: Button = null!;
   
     //對話框
     @property(Label)
     public dialogContent: Label | null = null;
-    //@property(TextShowerFu)
-    //private textShowerRandy: TextShowerFu | null = null;
     @property(TextShowerRandy)
     private textShowerRandy: TextShowerRandy | null = null;
   
     //動畫
     @property(Animation)
     Fight_SceneTrans_Start: Animation | null = null;
-  
     @property(AudioController)
     AudioController: AudioController | null = null;
+
+    //設定
+    @property(Button)
+    private settingBtn: Button | null = null;
+    @property(Node)
+    private SettingPage: Node | null = null;
+
     private battleData: BattleData;
     private TozyCurrentHP: number = 0;
     private TozyCurrentStatus: Record<string, number> = {};
@@ -95,8 +105,7 @@ import {
     private currentTurn: number = 0;
     private isPlayerTurn: boolean = true; // 初始設定為玩家回合
   
-    @property(Node)
-    private settingBtn: Node | null = null;
+    
 
     start() {
       // 假設你已經將fight.json加載到fightSetting中
@@ -111,16 +120,17 @@ import {
         Animation.EventType.FINISHED,
         () => {
           this.roundStart();
+          this.SettingPage.active = false;
+          this.settingBtn.node.on(Button.EventType.CLICK, this.openSettingMenu, this);
         },
         this
       );
-      this.node.getParent().getChildByName("SettingPage").active = false;
-      this.settingBtn?.on(Node.EventType.MOUSE_UP, this.openSettingMenu, this);
-      
     }
+
     openSettingMenu() {
-      this.node.getParent().getChildByName("SettingPage").active = true;
+      this.SettingPage.active = true;
     }
+
     initializeBattle() {
       const { Tozy, Chii } = this.battleData.characters;
       this.TozyCurrentHP = Tozy.HP;
@@ -146,30 +156,73 @@ import {
   
     // 玩家行動的邏輯...
     playerTakesTurn() {
-      this.enableDodgeButton(true);
-      //其他按鈕
+      this.enableButton(this.DodgeBtn, true);
+      this.enableButton(this.SorryBtn, true);
+      this.enableButton(this.ComboBtn, true);
+      this.enableButton(this.LogicBtn, true);
     }
   
-    enableDodgeButton(enable: boolean) {
-      this.dodgeButton.interactable = enable;
-      if (enable) {
-        this.dodgeButton.node.on(Button.EventType.CLICK, this.onDodge, this);
-      } else {
-        this.dodgeButton.node.off(Button.EventType.CLICK, this.onDodge, this);
+    enableButton(button: Button, enable: boolean) {
+      button.interactable = enable;
+      switch(button){
+        case this.DodgeBtn:
+          if (enable) {
+            button.node.on(Button.EventType.CLICK, this.onDodge, this);
+          } else {
+            button.node.off(Button.EventType.CLICK, this.onDodge, this);
+          }
+        break;
+        case this.SorryBtn:
+          if (enable) {
+            button.node.on(Button.EventType.CLICK, this.onSorry, this);
+          } else {
+            button.node.off(Button.EventType.CLICK, this.onSorry, this);
+          }
+        break;
+        case this.ComboBtn:
+          if (enable) {
+            button.node.on(Button.EventType.CLICK, this.onCombo, this);
+          } else {
+            button.node.off(Button.EventType.CLICK, this.onCombo, this);
+          }
+        break;
+        case this.LogicBtn:
+          if (enable) {
+            button.node.on(Button.EventType.CLICK, this.onLogic, this);
+          } else {
+            button.node.off(Button.EventType.CLICK, this.onLogic, this);
+          }
+        break;
       }
     }
   
     // 玩家選擇閃避
-    onDodge() {
+    useSkill(skillId) {
       this.AudioController.play("Click");
-      this.enableDodgeButton(false); // 禁用閃避按鈕
-      const playerSkills = this.battleData.skills.player;
-      const dodgeSkill = playerSkills.find((s) => s.id === "Dodge");
-      console.log(`player uses ${dodgeSkill.id}`);
+      this.enableButton(this[`${skillId}Btn`], false); // 根據技能ID動態禁用按鈕
+      const skill = this.battleData.skills.player.find((s) => s.id === skillId);
+      console.log(`player uses ${skill.id}`);
       this.isPlayerTurn = false;
-      if (dodgeSkill) {
-        this.applySkillEffect(dodgeSkill);
+      if (skill) {
+        this.applySkillEffect(skill);
       }
+    }
+
+    onDodge() {
+      this.useSkill("Dodge");
+    }
+
+    onSorry() {
+
+      this.useSkill("Sorry");
+    }
+
+    onCombo() {
+      this.useSkill("Combo");
+    }
+
+    onLogic() {
+      this.useSkill("Logic");
     }
   
     //先預設回合動作，以後會改
@@ -230,9 +283,10 @@ import {
     }
   
     //檢查角色狀態
-    checkCharacterStatus(TozyCurrentStatus: Record<string, any>): string {
-      if (TozyCurrentStatus["dodge"]) return "dodge";
-      if (TozyCurrentStatus["blind"]) return "blind";
+    checkCharacterStatus(targetCurrentStatus: Record<string, any>): string {
+      if (targetCurrentStatus["dodge"]) return "dodge";
+      if (targetCurrentStatus["blind"]) return "blind";
+      if (targetCurrentStatus["DecAttack"]) return "DecAttack";
       return "normal";
     }
   
