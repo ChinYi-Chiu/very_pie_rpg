@@ -41,6 +41,123 @@
             "effect_opponent": {},
             "description": "因為處於致盲狀態，無法閃避。",
             "animation": "none"
+          },
+          "DecAttack": {
+            "effect_player": {
+              "status": "dodge",
+              "duration": 1
+            },
+            "effect_opponent": {},
+            "description": "能躲避大部分8+9的攻擊(本回合)。",
+            "animation": "Fight_TozyDodge"
+          }
+        }
+      },
+      {
+        "id": "Logic",
+        "target": "opponent",
+        "type": "attack",
+        "description": "Tozy使用了邏輯壓制。",
+        "effects": {
+          "normal": {
+            "effect_player": {},
+            "effect_opponent": {
+              "damage": 1
+            },
+            "description": "往起哥的痛處狂噴，造成了心理傷害。",
+            "animation": "Fight_TozyLogic"
+          },
+          "dodge": {
+            "effect_player": {},
+            "effect_opponent": {
+              "damage": 1
+            },
+            "description": "往起哥的痛處狂噴，造成了心理傷害。",
+            "animation": "Fight_TozyLogic"
+          },
+          "blind": {
+            "effect_player": {},
+            "effect_opponent": {
+              "damage": 1
+            },
+            "description": "往起哥的痛處狂噴，造成了心理傷害。",
+            "animation": "Fight_TozyLogic"
+          }
+        }
+      },
+      {
+        "id": "Combo",
+        "target": "opponent",
+        "type": "attack",
+        "description": "Tozy使用了組合拳。",
+        "effects": {
+          "normal": {
+            "effect_player": {},
+            "effect_opponent": {
+              "damage": 3
+            },
+            "description": "中路野獸附體，直接把起哥和他的快樂夥伴們痛扁一頓",
+            "animation": "Fight_TozyCombo"
+          },
+          "dodge": {
+            "effect_player": {},
+            "effect_opponent": {
+              "damage": 3
+            },
+            "description": "中路野獸附體，直接把起哥和他的快樂夥伴們痛扁一頓",
+            "animation": "Fight_TozyCombo"
+          },
+          "blind": {
+            "effect_player": {},
+            "effect_opponent": {
+              "damage": 3
+            },
+            "description": "中路野獸附體，撕掉布袋，直接把起哥和他的快樂夥伴們痛宰一頓",
+            "animation": "Fight_TozyCombo"
+          }
+        }
+      },
+      {
+        "id": "Sorry",
+        "target": "player",
+        "type": "buff",
+        "description": "Tozy使用了土下坐。",
+        "effects": {
+          "normal": {
+            "effect_player": {
+              "status": "DecAttack",
+              "duration": 1
+            },
+            "effect_opponent": {},
+            "description": "突然的道歉讓起哥腦子的血開始往小頭流動，攻擊降低。",
+            "animation": "Fight_TozySorry"
+          },
+          "dodge": {
+            "effect_player": {
+              "status": "DecAttack",
+              "duration": 1
+            },
+            "effect_opponent": {},
+            "description": "突然的道歉讓起哥腦子的血開始往小頭流動，攻擊降低。",
+            "animation": "Fight_TozySorry"
+          },
+          "blind": {
+            "effect_player": {
+              "status": "DecAttack",
+              "duration": 1
+            },
+            "effect_opponent": {},
+            "description": "突然的道歉讓起哥腦子的血開始往小頭流動，攻擊降低。",
+            "animation": "Fight_TozySorry"
+          },
+          "DecAttack": {
+            "effect_player": {
+              "status": "DecAttack",
+              "duration": 1
+            },
+            "effect_opponent": {},
+            "description": "能躲避大部分8+9的攻擊(本回合)。",
+            "animation": "Fight_TozySorry"
           }
         }
       },
@@ -176,6 +293,14 @@
             "effect_opponent": {},
             "description": "Tozy在致盲狀態下,胡亂揮手擋住了攻擊。",
             "animation": "Fight_ChiiFist"
+          },
+          "DecAttack": {
+            "effect_player": {
+              "damage": 0
+            },
+            "effect_opponent": {},
+            "description": "因起哥的攻擊下降，未造成傷害。",
+            "animation": "Fight_ChiiFist"
           }
         }
       },
@@ -191,6 +316,7 @@
               "duration": 2
             },
             "effect_opponent": {},
+            "description": "Tozy進入致盲狀態。",
             "animation": "Fight_ChiiSack"
           },
           "dodge": {
@@ -209,6 +335,15 @@
             },
             "description": "Tozy已經被蓋布袋了。",
             "animation": "none"
+          },
+          "DecAttack": {
+            "effect_player": {
+              "status": "blind",
+              "duration": 2
+            },
+            "effect_opponent": {},
+            "description": "Tozy進入致盲狀態。",
+            "animation": "Fight_ChiiFist"
           }
         }
       },
@@ -244,6 +379,14 @@
               "status": "rage_down"
             },
             "description": "Tozy因致盲而無法閃避椅子攻擊,受到重傷。",
+            "animation": "Fight_ChiiChair"
+          },
+          "DecAttack": {
+            "effect_player": {
+              "damage": 1
+            },
+            "effect_opponent": {},
+            "description": "因起哥的攻擊下降，造成的效果並不顯著。",
             "animation": "Fight_ChiiChair"
           }
         }

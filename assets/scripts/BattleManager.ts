@@ -284,9 +284,9 @@ import {
   
     //檢查角色狀態
     checkCharacterStatus(targetCurrentStatus: Record<string, any>): string {
+      if (targetCurrentStatus["DecAttack"]) return "DecAttack";
       if (targetCurrentStatus["dodge"]) return "dodge";
       if (targetCurrentStatus["blind"]) return "blind";
-      if (targetCurrentStatus["DecAttack"]) return "DecAttack";
       return "normal";
     }
   
