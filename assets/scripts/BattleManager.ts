@@ -104,8 +104,6 @@ import {
     private ChiiCurrentStatus: Record<string, number> = {};
     private currentTurn: number = 0;
     private isPlayerTurn: boolean = true; // 初始設定為玩家回合
-  
-    
 
     start() {
       // 假設你已經將fight.json加載到fightSetting中
@@ -122,7 +120,11 @@ import {
           this.roundStart();
           this.SettingPage.active = false;
           this.settingBtn.node.on(Button.EventType.CLICK, this.openSettingMenu, this);
-        },
+          this.DodgeBtn.node.on(Button.EventType.CLICK, this.onDodge, this);
+          this.SorryBtn.node.on(Button.EventType.CLICK, this.onSorry, this);
+          this.ComboBtn.node.on(Button.EventType.CLICK, this.onCombo, this);
+          this.LogicBtn.node.on(Button.EventType.CLICK, this.onLogic, this);
+        },  
         this
       );
     }
@@ -158,62 +160,35 @@ import {
     playerTakesTurn() {
       this.enableButton(this.DodgeBtn, true);
       this.enableButton(this.SorryBtn, true);
-      this.enableButton(this.ComboBtn, true);
+      this.enableButton(this.ComboBtn, false);
       this.enableButton(this.LogicBtn, true);
     }
-  
+
     enableButton(button: Button, enable: boolean) {
       button.interactable = enable;
-      switch(button){
-        case this.DodgeBtn:
-          if (enable) {
-            button.node.on(Button.EventType.CLICK, this.onDodge, this);
-          } else {
-            button.node.off(Button.EventType.CLICK, this.onDodge, this);
-          }
-        break;
-        case this.SorryBtn:
-          if (enable) {
-            button.node.on(Button.EventType.CLICK, this.onSorry, this);
-          } else {
-            button.node.off(Button.EventType.CLICK, this.onSorry, this);
-          }
-        break;
-        case this.ComboBtn:
-          if (enable) {
-            button.node.on(Button.EventType.CLICK, this.onCombo, this);
-          } else {
-            button.node.off(Button.EventType.CLICK, this.onCombo, this);
-          }
-        break;
-        case this.LogicBtn:
-          if (enable) {
-            button.node.on(Button.EventType.CLICK, this.onLogic, this);
-          } else {
-            button.node.off(Button.EventType.CLICK, this.onLogic, this);
-          }
-        break;
-      }
     }
-  
-    // 玩家選擇閃避
+    
     useSkill(skillId) {
       this.AudioController.play("Click");
-      this.enableButton(this[`${skillId}Btn`], false); // 根據技能ID動態禁用按鈕
+      this.enableButton(this.DodgeBtn, false);
+      this.enableButton(this.SorryBtn, false);
+      this.enableButton(this.ComboBtn, false);
+      this.enableButton(this.LogicBtn, false);
+      
       const skill = this.battleData.skills.player.find((s) => s.id === skillId);
       console.log(`player uses ${skill.id}`);
       this.isPlayerTurn = false;
       if (skill) {
         this.applySkillEffect(skill);
       }
-    }
+    }    
 
     onDodge() {
       this.useSkill("Dodge");
     }
 
     onSorry() {
-
+      this.checkEndingC();
       this.useSkill("Sorry");
     }
 
@@ -425,9 +400,17 @@ import {
         this.node.emit("Fight_SceneTrans_EndingA");
         // 可以在這裡調用遊戲結束的UI更新函式
       } else if (this.ChiiCurrentHP <= 0) {
+        this.node.emit("Fight_SceneTrans_EndingB");
       } else {
         // 遊戲未結束，進行下一回合
         this.roundStart();
+      }
+    }
+
+    checkEndingC() {
+      const randomNumber = Math.random();
+      if (randomNumber < 0.01) {
+        this.node.emit("Fight_SceneTrans_EndingC");
       }
     }
   
