@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "16a4bc5b-b63e-4bf6-b181-423976e3a5ac",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "16a4bc5b-b63e-4bf6-b181-423976e3a5ac@6c48a",
+      "displayName": "敵人血",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "16a4bc5b-b63e-4bf6-b181-423976e3a5ac",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "16a4bc5b-b63e-4bf6-b181-423976e3a5ac@f9941",
+      "displayName": "敵人血",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -121,
+        "offsetY": 132,
+        "trimX": 687,
+        "trimY": 334,
+        "width": 186,
+        "height": 49,
+        "rawWidth": 1802,
+        "rawHeight": 981,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -93,
+            -24.5,
+            0,
+            93,
+            -24.5,
+            0,
+            -93,
+            24.5,
+            0,
+            93,
+            24.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            687,
+            647,
+            873,
+            647,
+            687,
+            598,
+            873,
+            598
+          ],
+          "nuv": [
+            0.3812430632630411,
+            0.6095820591233435,
+            0.48446170921198667,
+            0.6095820591233435,
+            0.3812430632630411,
+            0.6595310907237513,
+            0.48446170921198667,
+            0.6595310907237513
+          ],
+          "minPos": [
+            -93,
+            -24.5,
+            0
+          ],
+          "maxPos": [
+            93,
+            24.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "16a4bc5b-b63e-4bf6-b181-423976e3a5ac@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "16a4bc5b-b63e-4bf6-b181-423976e3a5ac@f9941"
+  }
+}

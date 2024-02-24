@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "5def36b4-288e-4303-ad28-2089d5c805cb",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "5def36b4-288e-4303-ad28-2089d5c805cb@6c48a",
+      "displayName": "噴血R",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "5def36b4-288e-4303-ad28-2089d5c805cb",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "5def36b4-288e-4303-ad28-2089d5c805cb@f9941",
+      "displayName": "噴血R",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": -0.5,
+        "trimX": 1,
+        "trimY": 1,
+        "width": 8,
+        "height": 229,
+        "rawWidth": 10,
+        "rawHeight": 230,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -4,
+            -114.5,
+            0,
+            4,
+            -114.5,
+            0,
+            -4,
+            114.5,
+            0,
+            4,
+            114.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            1,
+            229,
+            9,
+            229,
+            1,
+            0,
+            9,
+            0
+          ],
+          "nuv": [
+            0.1,
+            0,
+            0.9,
+            0,
+            0.1,
+            0.9956521739130435,
+            0.9,
+            0.9956521739130435
+          ],
+          "minPos": [
+            -4,
+            -114.5,
+            0
+          ],
+          "maxPos": [
+            4,
+            114.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "5def36b4-288e-4303-ad28-2089d5c805cb@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "5def36b4-288e-4303-ad28-2089d5c805cb@f9941"
+  }
+}

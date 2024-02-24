@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "77bcb40d-d340-459a-ac49-8e2109640138",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "77bcb40d-d340-459a-ac49-8e2109640138@6c48a",
+      "displayName": "壽司",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "77bcb40d-d340-459a-ac49-8e2109640138",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "77bcb40d-d340-459a-ac49-8e2109640138@f9941",
+      "displayName": "壽司",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -1,
+        "offsetY": -9,
+        "trimX": 135,
+        "trimY": 171,
+        "width": 495,
+        "height": 315,
+        "rawWidth": 767,
+        "rawHeight": 639,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -247.5,
+            -157.5,
+            0,
+            247.5,
+            -157.5,
+            0,
+            -247.5,
+            157.5,
+            0,
+            247.5,
+            157.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            135,
+            468,
+            630,
+            468,
+            135,
+            153,
+            630,
+            153
+          ],
+          "nuv": [
+            0.1760104302477184,
+            0.23943661971830985,
+            0.8213820078226858,
+            0.23943661971830985,
+            0.1760104302477184,
+            0.7323943661971831,
+            0.8213820078226858,
+            0.7323943661971831
+          ],
+          "minPos": [
+            -247.5,
+            -157.5,
+            0
+          ],
+          "maxPos": [
+            247.5,
+            157.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "77bcb40d-d340-459a-ac49-8e2109640138@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "77bcb40d-d340-459a-ac49-8e2109640138@f9941"
+  }
+}

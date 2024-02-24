@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "60859373-6c44-484b-8a62-9d6a235ae283",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "60859373-6c44-484b-8a62-9d6a235ae283@6c48a",
+      "displayName": "主廚壽司",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "60859373-6c44-484b-8a62-9d6a235ae283",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "60859373-6c44-484b-8a62-9d6a235ae283@f9941",
+      "displayName": "主廚壽司",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 59,
+        "trimX": 76,
+        "trimY": 244,
+        "width": 1082,
+        "height": 169,
+        "rawWidth": 1234,
+        "rawHeight": 775,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -541,
+            -84.5,
+            0,
+            541,
+            -84.5,
+            0,
+            -541,
+            84.5,
+            0,
+            541,
+            84.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            76,
+            531,
+            1158,
+            531,
+            76,
+            362,
+            1158,
+            362
+          ],
+          "nuv": [
+            0.06158833063209076,
+            0.4670967741935484,
+            0.9384116693679092,
+            0.4670967741935484,
+            0.06158833063209076,
+            0.6851612903225807,
+            0.9384116693679092,
+            0.6851612903225807
+          ],
+          "minPos": [
+            -541,
+            -84.5,
+            0
+          ],
+          "maxPos": [
+            541,
+            84.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "60859373-6c44-484b-8a62-9d6a235ae283@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "60859373-6c44-484b-8a62-9d6a235ae283@f9941"
+  }
+}

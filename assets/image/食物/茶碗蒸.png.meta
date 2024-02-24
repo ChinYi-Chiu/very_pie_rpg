@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "509f3b61-ba90-48a0-800e-813bfde80f24",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "509f3b61-ba90-48a0-800e-813bfde80f24@6c48a",
+      "displayName": "茶碗蒸",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "509f3b61-ba90-48a0-800e-813bfde80f24",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "509f3b61-ba90-48a0-800e-813bfde80f24@f9941",
+      "displayName": "茶碗蒸",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -36,
+        "offsetY": -9,
+        "trimX": 225,
+        "trimY": 126,
+        "width": 342,
+        "height": 405,
+        "rawWidth": 864,
+        "rawHeight": 639,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -171,
+            -202.5,
+            0,
+            171,
+            -202.5,
+            0,
+            -171,
+            202.5,
+            0,
+            171,
+            202.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            225,
+            513,
+            567,
+            513,
+            225,
+            108,
+            567,
+            108
+          ],
+          "nuv": [
+            0.2604166666666667,
+            0.16901408450704225,
+            0.65625,
+            0.16901408450704225,
+            0.2604166666666667,
+            0.8028169014084507,
+            0.65625,
+            0.8028169014084507
+          ],
+          "minPos": [
+            -171,
+            -202.5,
+            0
+          ],
+          "maxPos": [
+            171,
+            202.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "509f3b61-ba90-48a0-800e-813bfde80f24@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "509f3b61-ba90-48a0-800e-813bfde80f24@f9941"
+  }
+}

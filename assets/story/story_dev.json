@@ -1,0 +1,224 @@
+{
+  "scenes": [
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "tozy",
+          "speak": "美食公道伯-tozy今天來到了我們台灣最派-起哥的店，希望這次不會像上次炸雞那樣了，我們廢話少說，馬上來吃吃看起哥最頂的海鮮丼飯"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "id": "rice",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
+      "type": "scene",
+      "situation": "",
+      "options": [
+        {
+          "role": "tozy",
+          "chiiFire": "down",
+          "option": "魚都算新鮮的，醋飯0分，貝類有沙，海膽...也沒辦法，就幾百塊的丼飯",
+          "speak": "醋飯0分，海膽...也沒辦法，就幾百塊的丼飯，放一點海膽給你，算偷笑了，給你拍拍照，對不對，海膽，本來就不是好東西，但不得不說他們的魚都算新鮮的，目前......"
+        }, {
+          "role": "tozy",
+          "chiiFire": "keep",
+          "option": "魚都算新鮮，醋飯我不好說，阿海膽正常這個價位的水準",
+          "speak": "這個價位的日式丼飯，雖然魚保持著新鮮的口感，但醋飯的味道似乎未能達到期望的水準，顯得稍嫌平淡。至於海膽，或許也難以期待太高的品質，這價位的丼飯畢竟難以提供極上的海膽享受。總體而言，這確實是一份價格相對親民的日式丼飯，但在特色口味方面，或許還有一些進步的空間。"
+        }, {
+          "role": "tozy",
+          "chiiFire": "up",
+          "option": "奇蹟の海膽、神の生魚片，光の醋飯，這是極致日式奢華饗宴！",
+          "speak": "這絕對是舌尖上的極致奢華！海膽的濃郁、柔滑的質地仿佛在口中綻放出海洋的奇蹟，生魚片的鮮美質感宛如一幅富有層次感的畫作，而醋飯則以微酸的滋味為整個菜品增添了一抹清新。這不僅僅是一道料理，而是一場身臨其境的味覺冒險，令人陶醉於日本烹飪藝術的奇妙世界。這確實是一道日式料理中的極致之選，讓人無法忘懷的味蕾饗宴！(Tozy爆衣)"
+        }
+      ]
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "tozy",
+          "speak": "ㄤㄤ你吃這個，看好不好吃"
+        }
+      ]
+    },
+    {
+      "type": "scene",
+      "situation": "",
+      "options": [
+        {
+          "role": "anan",
+          "chiiFire": "up",
+          "option": "狗都不吃",
+          "speak": "狗都不吃"
+        }, {
+          "role": "anan",
+          "chiiFire": "down",
+          "option": "狗都不吃",
+          "speak": "狗都不吃"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "id": "egg",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
+      "type": "scene",
+      "situation": "",
+      "options": [
+        {
+          "role": "tozy",
+          "chiiFire": "down",
+          "option": "茶碗蒸有夠淡，加入蝦仁和海瓜子甚至鮭魚卵還是一樣，無言",
+          "speak": "我們試一下茶碗蒸，茶碗蒸味道比我想像當中的味道要淡很多，這裡雖然有放蝦仁跟海瓜子，但是整個其實是沒有味道的。我找不到醬油就加了這個鮭魚卵進去，但還是沒什麼味道。這就是，無聲的抗議 (把一碗沒吃完的飯拿到隔壁桌)"
+        }, {
+          "role": "tozy",
+          "chiiFire": "keep",
+          "option": "茶碗蒸CP值高，味道清淡。口味個人喜好，或許有人愛",
+          "speak": "試了茶碗蒸，裡頭有海瓜子和蝦仁，感覺CP值很高，但味道比預期淡許多。一般茶碗蒸常有些微鹹味，然而這裡雖放有蝦仁和海瓜子，整體卻相當清淡。猶豫是否添加醬油，最終選擇加了鮭魚卵，但仍感覺缺乏風味。個人口味啦，搞不好有人喜歡清淡的"
+        }, {
+          "role": "tozy",
+          "chiiFire": "up",
+          "option": "茶碗蒸奢華至極，CP值冠絕，挑戰極限味蕾的大膽藝術，藝術就是起哥阿！",
+          "speak": "品味這奢華至極的茶碗蒸，彷彿身臨味覺仙境！海瓜子和蝦仁的絕妙交融，CP值冠絕群倫！儘管味道略嫌淡雅，但這是大膽挑戰味蕾極限的藝術。不禁讚嘆，或許這清新淡雅的風格，正是烹飪藝術的極致之選！zy爆衣)"
+        }
+      ]
+    },{
+      "type": "event",
+      "id": "chiiComing",
+      "speak": "攝影:(低聲)起哥來了~起哥來了...』",
+      "aniDelay": 20
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "chii",
+          "speak": "在你的世界有溫暖這件事嗎，你對台灣有甚麼貢獻"
+        }, {
+          "role": "tozy",
+          "speak": "先帶ㄤㄤ出去"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "id": "girlwalkaway",
+      "speak": "(妹妹離開)",
+      "aniDelay": 2000
+    },
+    {
+      "type": "event",
+      "id": "chii_angry",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "chii",
+          "speak": "你想要怎樣我跟你奉陪到底"
+        }, {
+          "role": "tozy",
+          "speak": "我只是出來吃個飯而已"
+        }, {
+          "role": "tozy",
+          "speak": "食物是個人主觀的嘛"
+        },
+        {
+          "role": "tozy",
+          "speak": "我們去上面聊好了，不然打擾其他人用餐，反正我也吃不下了，你來打擾我用餐，有甚麼辦法，你就是這樣嘛"
+        } ,{
+          "role": "chii",
+          "speak": "你真的很屌，蠻屌"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "id": "Back_Ground",
+      "speak": "(離開店家)",
+      "aniDelay": 20
+    },
+    {
+      "type": "event",
+      "id": "chii_up",
+      "speak": "(離開店家)",
+      "aniDelay": 20
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "tozy",
+          "speak": "起哥你覺得我就是帶著立場過來，來批評的"
+        } ,{
+          "role": "chii",
+          "speak": "我只說，我們華人應該"
+        } ,{
+          "role": "tozy",
+          "speak": "不要再跟我扯哪裡人，這我真的聽不下去"
+        } ,{
+          "role": "chii",
+          "speak": "我們接受任何善意的批評"
+        }
+      ]
+    },
+    {
+      "type": "scene",
+      "situation": "",
+      "options": [
+        {
+          "role": "tozy",
+          "chiiFire": "down",
+          "option": "這是仇中是嗎?",
+          "speak": "那你就不要再跟我扯哪裡人，今天美國人來吃飯你會跟他說這些嗎，這是仇中是嗎?搞不懂ㄟ"
+        }, {
+          "role": "tozy",
+          "chiiFire": "keep",
+          "option": "好啦，就這樣吧，掰掰",
+          "speak": "好啦，就這樣吧，掰掰"
+        }
+        
+      ]
+    },
+    {
+      "type": "event",
+      "id": "stare",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
+      "type": "dialog",
+      "dialogs": [
+        {
+          "role": "tozy",
+          "speak": "為甚麼要扯國籍，我搞不懂ㄟ，仇中是不......"
+        },{
+          "role": "chii",
+          "speak": "起派...鐵拳——————"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "id": "chii_fright",
+      "speak": "",
+      "aniDelay": 20
+    },
+    {
+      "type": "event",
+      "id": "Indoor_SceneTrans_End",
+      "speak": "",
+      "aniDelay": 2000
+    }
+  ]
+}
